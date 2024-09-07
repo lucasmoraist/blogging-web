@@ -24,7 +24,7 @@ export function Header({ isLogged }: Props) {
           <div className={style.links}>
             <div>
               <Link className={style.linkNavigate} to={'/signup'}>
-                Create Post
+                Write
               </Link>
               <Link className={style.linkNavigate} to={'/profile'}>
                 Profile
