@@ -1,6 +1,6 @@
 import style from './header.module.scss';
 import logo from '/assets/img/logo.png';
-import { MenuHamburguer } from '../menu-hamburguer';
+import { MenuHamburguer } from './menu-hamburguer';
 import { Link } from 'react-router-dom';
 import { Button } from '../button';
 

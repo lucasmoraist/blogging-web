@@ -2,7 +2,7 @@ import { useState } from 'react';
 import style from './menu.module.scss';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Button } from '../button';
+import { Button } from '../../button';
 
 interface Props {
   isLogged: boolean;
