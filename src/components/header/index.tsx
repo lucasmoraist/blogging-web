@@ -35,10 +35,10 @@ export function Header({ isLogged }: Props) {
             </Link>
           </div>
         ) : (
-          <>
+          <div className={style.buttons}>
             <Button option="secondary">Sign-up</Button>
             <Button option="primary">Sign-in</Button>
-          </>
+          </div>
         )}
       </div>
     </header>
