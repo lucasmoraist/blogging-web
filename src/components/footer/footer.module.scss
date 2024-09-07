@@ -1,0 +1,17 @@
+@import '@/styles/_variables';
+@import '@/styles/_variables';
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $secondary_color;
+    width: 100%;
+    padding: 30px 0;
+
+    p {
+        color: $mustard_yellow;
+        font-family: $roboto_font;
+        font-size: 14px;
+    }
+}
