@@ -1,34 +1,53 @@
-@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
 @import '@/styles/_variables';
 
 .btn {
-    width: 145px;
-    height: 40px;
+  width: 145px;
+  height: 40px;
 
-    border-radius: 31px;
+  border-radius: 31px;
 
-    font-family: $roboto_font;
-    font-size: 16px;
-    line-height: auto;
-
-    &:hover {
-        transition: ease-in .3s;
-        box-shadow: 0 4px 4px rgba(39, 174, 96, .2);
-    }
-
-    &:not(:hover) {
-        transition: ease-in .6s;
-    }
+  font-family: $roboto_font;
+  font-size: 16px;
+  line-height: auto;
 }
 
 .btnPrimary {
-    border: none;
-    background-color: $lime_green;
-    color: #fff;
+  border: none;
+  background-color: $lime_green;
+  color: #fff;
 }
 
 .btnSecondary {
-    border: 2px solid $lime_green;
-    background-color: transparent;
-    color: $lime_green;
+  border: 2px solid $lime_green;
+  background-color: transparent;
+  color: $lime_green;
+}
+
+@media (min-width: $tablet_sml) and (max-width: $desktop_sml) {
+  .btn {
+    width: 96px;
+    height: 31px;
+  }
+}
+
+@media (min-width: $desktop_sml) {
+  .btn {
+    cursor: pointer;
+    &:hover {
+      transition: ease-in 0.3s;
+      box-shadow: 0 4px 4px rgba(39, 174, 96, 0.2);
+    }
+
+    &:not(:hover) {
+      transition: ease-in 0.6s;
+    }
+  }
+}
+
+@media (min-width: $desktop_lg) {
+  .btn {
+    width: 120px;
+    height: 40px;
+  }
 }
