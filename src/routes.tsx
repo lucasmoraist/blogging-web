@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Footer } from './components/footer';
 
 export function AppRoutes() {
-    const [isLogged, setIsLogged] = useState(true);
+    const [isLogged, setIsLogged] = useState(false);
     return <>
         <Router>
             <Header isLogged={isLogged} />
