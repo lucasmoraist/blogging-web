@@ -26,6 +26,7 @@
 
   .menu {
     display: none;
+
     .links {
       div {
         gap: 20px;
@@ -42,6 +43,11 @@
           gap: 5px;
         }
       }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
     }
   }
 
@@ -60,7 +66,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) and (max-width: $desktop_sml) {
+  @media (min-width: $tablet_sml) and (max-width: $desktop_md) {
     height: 100px;
 
     .logo {
