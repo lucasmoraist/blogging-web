@@ -1,10 +1,10 @@
 @import '@/styles/_variables';
-@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
 
 .postContainer {
   display: flex;
   flex-direction: column;
-  
+
   border-radius: 10px;
   width: 254px;
   height: auto;
@@ -16,6 +16,7 @@
 
   .postImage {
     height: 171px;
+
     img {
       width: 100%;
       height: 100%;
@@ -30,40 +31,92 @@
     padding: 0 5px;
 
     .postInfo {
-        display: flex;
-        align-items: center;
-        width: 100%;
+      display: flex;
+      align-items: center;
+      width: 100%;
 
-        h2 {
-            width: 70%;
-            font-family: $lato_font;
-            font-size: 18px;
-            color: $secondary_color;
-        }
+      h2 {
+        width: 70%;
+        font-family: $lato_font;
+        font-size: 18px;
+        color: $secondary_color;
+      }
 
-        .postNotification {
-            width: 30%;
-            height: auto;
-            text-align: right;
-            font-family: $lato_font;
-            font-size: 14px;
-        }
+      .postNotification {
+        width: 30%;
+        height: auto;
+        text-align: right;
+        font-family: $lato_font;
+        font-size: 16px;
+      }
 
-        .postNew {
-            color: $bg_color;
-            background-color: $mustard_yellow;
-            padding: 3px 4px;
-            border-radius: 30px;
-        }
+      .postNew {
+        color: $bg_color;
+        background-color: $mustard_yellow;
+        padding: 6px 8px;
+        border-radius: 30px;
+      }
 
-        .postOld {
-            color: $secondary_color;
-        }
+      .postOld {
+        color: $secondary_color;
+      }
     }
 
 
     .postDescription {
-        display: none;
+      display: flex;
+      font-family: $montserrat_font;
+      font-size: 16px;
+      font-weight: 700;
+      color: $secondary_color;
     }
   }
+
+  @media (min-width: $tablet_sml) {
+    flex-direction: row;
+    width: 676px;
+    height: 229px;
+    padding-bottom: 0;
+
+    .postImage {
+      width: 355px;
+      height: 100%;
+
+      img {
+        border-radius: 10px 0 0 10px;
+      }
+    }
+
+    .postInfoWrapper {
+      padding: 10px 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .postInfo {
+        h2 {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop_sml) {
+    .postInfo {
+      h2 {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
+    .postImage {
+      width: 355px;
+    }
+  }
+
 }
