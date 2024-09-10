@@ -1,6 +1,7 @@
 import { IPost } from '@/interface/post.interface';
 import style from './styles/aside.module.scss';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   posts: IPost[];
@@ -11,6 +12,7 @@ interface Props {
 // Mas pode-se mudar o objetivo e mostrar apenas os posts melhores avaliados
 export function Aside({ posts }: Props) {
   const [randomPosts, setRandomPosts] = useState<IPost[]>([]);
+  const navigate = useNavigate();
 
   const getRandomPosts = (postList: IPost[], count: number): IPost[] => {
     return postList.sort(() => Math.random() - 0.5).slice(0, count);
@@ -27,7 +29,7 @@ export function Aside({ posts }: Props) {
         {randomPosts.map((post) => (
           <div key={post.id} className={style.post}>
             <img src={post.image} alt={`Imagem do post sobre ${post.title}`} width={200} />
-            <h3>{post.title}</h3>
+            <h3 onClick={() => navigate(`/post/${post.id}`)}>{post.title}</h3>
           </div>
         ))}
       </div>
