@@ -1,0 +1,31 @@
+@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
+
+.homeContainer {
+  display: flex;
+  padding: 58px 0 90px 0;
+  justify-content: center;
+
+  .feed {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 55px;
+  }
+
+  .randomPosts {
+    display: none;
+  }
+
+  @media (min-width: $desktop_sml) {
+    justify-content: space-around;
+
+    .randomPosts {
+      display: flex;
+    }
+  }
+
+  @media (min-width: $desktop_md) {
+    padding: 58px 161px 90px 161px;
+  }
+}
