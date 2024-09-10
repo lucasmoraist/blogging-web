@@ -29,12 +29,6 @@ export function Posts({ post }: Props) {
     }
   };
 
-  const postDetails = () => {
-    console.log(post.id);
-
-    navigate(`/post/${post.id}`);
-  };
-
   return (
     <div className={style.postContainer}>
       <div className={style.postImage}>
@@ -42,7 +36,7 @@ export function Posts({ post }: Props) {
       </div>
       <div className={style.postInfoWrapper}>
         <div className={style.postInfo}>
-          <h2 onClick={postDetails}>{post.title}</h2>
+          <h2 onClick={() => navigate(`/post/${post.id}`)}>{post.title}</h2>
           <div className={style.postNotification}>
             {postDate(post.createdAt) === 'New' ? (
               <span className={style.postNew}>New</span>
