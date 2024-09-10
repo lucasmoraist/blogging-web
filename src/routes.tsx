@@ -1,20 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/home';
-import { Header } from './components/header';
 import { useState } from 'react';
-import { Footer } from './components/footer';
 import { PostDetails } from './pages/postDetails';
+import { PageDefault } from './components/pageDefault';
+import { NotFound } from './pages/notFound';
 
 export function AppRoutes() {
-    const [isLogged, setIsLogged] = useState(false);
-    return <>
-        <Router>
-            <Header isLogged={isLogged} />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path='/post/:id' element={<PostDetails />}/>
-            </Routes>
-            <Footer />
-        </Router>
+  const [isLogged, setIsLogged] = useState(false);
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PageDefault isLogged={isLogged} />}>
+            <Route index element={<Home />} />
+            <Route path="post/:id" element={<PostDetails />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
+  );
 }
