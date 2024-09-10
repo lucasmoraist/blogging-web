@@ -1,0 +1,48 @@
+@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
+
+.mainContainer {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    padding: 33px 34px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    button {
+        width: 80px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+
+        border: none;
+        background-color: $mustard_yellow;
+
+        color: #fff;
+
+        font-family: $lato_font;
+        font-size: 16px;
+        line-height: 20px;
+
+        cursor: pointer;
+        transition: ease-in .4s;
+
+        &:hover {
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        &:not(:hover){
+            transition: ease-out .9s;
+        }
+
+        svg {
+            width: auto;
+            height: 20px;
+        }
+    }
+}
