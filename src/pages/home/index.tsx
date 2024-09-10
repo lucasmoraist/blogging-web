@@ -1,4 +1,4 @@
-import { Post } from '@/components/post';
+import { PostRender } from '@/components/postRender';
 import posts from '@/data/posts.json';
 import style from './styles/home.module.scss';
 import { Aside } from './aside';
@@ -9,7 +9,7 @@ export function Home() {
       <div className={style.feed}>
         {posts.slice(0, 5).map((post) => (
           <div key={post.id}>
-            <Post post={post} />
+            <PostRender post={post} />
           </div>
         ))}
       </div>
