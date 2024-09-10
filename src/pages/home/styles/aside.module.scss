@@ -1,0 +1,45 @@
+@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
+
+.asideContainer {
+    position: sticky;
+    top: 20px; // Define a distância mínima do topo
+    align-self: flex-start; // Garante que o elemento "grude" no início da rolagem
+
+    .postWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        .post {
+            width: 265px;
+            height: auto;
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 10px;
+
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+
+            img {
+                width: 100%;
+                height: 168px;
+                object-fit: cover;
+                border-radius: 10px 10px 0 0;
+            }
+
+            h3 {
+                font-family: $lato_font;
+                font-size: 18px;
+                color: $secondary_color;
+                cursor: pointer;
+                padding: 5px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
