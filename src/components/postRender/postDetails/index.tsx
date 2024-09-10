@@ -21,7 +21,9 @@ export function Post({ post }: Props) {
   return (
     <div className={style.postWrapper}>
       <div className={style.post}>
-        <img src={post.image} alt="" />
+        <div className={style.postImage}>
+          <img src={post.image} alt="" />
+        </div>
 
         <div className={style.postContent}>
           <h2>{post.title}</h2>

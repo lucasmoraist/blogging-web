@@ -16,12 +16,21 @@
         flex-direction: column;
         gap: 30px;
 
-        img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
+        .postImage {
+            display: flex;
+            justify-content: center;
+            img {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+                max-height: 500px;
+
+                object-fit: cover;
+                border-radius: 10px;
+            }
         }
+
+
 
         .postContent {
             display: flex;
@@ -42,7 +51,6 @@
                 font-family: $montserrat_font;
                 font-size: 16px;
                 color: $secondary_color;
-                text-align: justify;
                 line-height: 24px;
             }
         }
@@ -59,6 +67,37 @@
             color: $secondary_color;
             font-weight: 600;
             line-height: 15px;
+        }
+    }
+
+    @media (min-width: $tablet_sml) {
+        .post {
+            .postContent {
+                h2 {
+                    font-size: 40px;
+                }
+    
+                p {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .postInfo {
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+
+    @media (min-width: $desktop_lg) {
+        .post {
+            .postImage {
+                img {
+                    max-width: 1000px;
+                    max-height: 500px;
+                }
+            }
         }
     }
 }
