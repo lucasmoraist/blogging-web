@@ -1,5 +1,5 @@
 import { IPost } from '@/interface/post.interface';
-import style from './post.module.scss';
+import style from './posts.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
