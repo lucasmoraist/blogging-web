@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import style from './menu.module.scss';
-import { Menu, X } from 'lucide-react';
+import { List, LogOut, Menu, SquarePen, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../button';
+import { authService } from '@/hooks/useAuth';
 
 interface Props {
   isLogged: boolean;
@@ -14,6 +15,11 @@ export function MenuHamburguer({ isLogged }: Props) {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    authService.logout();
+    navigate('/login');
   };
 
   return (
@@ -39,18 +45,22 @@ export function MenuHamburguer({ isLogged }: Props) {
         <ul className={`${!isLogged && style.disconnected}`}>
           {isLogged ? (
             <div className={style.links}>
-              <div>
-                <Link className={style.linkNavigate} to={'/signup'}>
-                  Create Post
-                </Link>
-                <Link className={style.linkNavigate} to={'/profile'}>
-                  Profile
-                </Link>
-              </div>
-              <Link className={style.linkNavigate} to={'/logout'}>
-                Logout
+            <div>
+              <Link className={style.linkNavigate} to={'/signup'}>
+                <SquarePen /> Write
+              </Link>
+              <Link className={style.linkNavigate} to={'/profile'}>
+                <List /> Posts
               </Link>
             </div>
+            {isLogged ? (
+              <button className={style.linkNavigate} onClick={handleLogout}>
+                <LogOut /> Logout
+              </button>
+            ) : (
+              ''
+            )}
+          </div>
           ) : (
             <>
               <Button option="secondary" onClick={() => navigate('/register')}>Sign-up</Button>

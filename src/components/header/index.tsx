@@ -6,6 +6,7 @@ import { Button } from '../button';
 import { authService } from '@/hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { autorun } from 'mobx';
+import { List, LogOut, SquarePen } from 'lucide-react';
 
 export function Header() {
   const [isLogged, setIsLogged] = useState(authService.isLogged);
@@ -19,8 +20,8 @@ export function Header() {
   }, []);
 
   const handleLogout = () => {
-    authService.logout(); // Chama o método de logout
-    navigate('/login'); // Redireciona para a página de login
+    authService.logout();
+    navigate('/login');
   };
 
   return (
@@ -38,15 +39,15 @@ export function Header() {
           <div className={style.links}>
             <div>
               <Link className={style.linkNavigate} to={'/signup'}>
-                Write
+                <SquarePen /> Write
               </Link>
               <Link className={style.linkNavigate} to={'/profile'}>
-                Profile
+                <List /> Posts
               </Link>
             </div>
             {isLogged ? (
               <button className={style.linkNavigate} onClick={handleLogout}>
-                Logout
+                <LogOut /> Logout
               </button>
             ) : (
               ''

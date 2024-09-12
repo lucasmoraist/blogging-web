@@ -62,12 +62,22 @@
 
         gap: 20px;
       }
-      .linkNavigate {
-        font-weight: 800;
-        text-decoration: none;
-        color: #fff;
-        font-family: $roboto_font;
-      }
+    }
+    .linkNavigate {
+      color: $mustard_yellow;
+
+      text-decoration: none;
+      font-size: 18px;
+      font-family: $roboto_font;
+      font-weight: bold;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      background: none;
+      border: none;
     }
 
     .closeButton {
