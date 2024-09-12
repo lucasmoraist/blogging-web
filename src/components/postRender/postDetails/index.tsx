@@ -22,7 +22,7 @@ export function Post({ post }: Props) {
     <div className={style.postWrapper}>
       <div className={style.post}>
         <div className={style.postImage}>
-          <img src={post.image} alt="" />
+          <img src={post.urlimage} alt="" />
         </div>
 
         <div className={style.postContent}>
@@ -32,8 +32,8 @@ export function Post({ post }: Props) {
       </div>
 
       <div className={style.postInfo}>
-        <p>Postado: {dateFormated(post.createdAt)}</p>
-        <p>Criado por: {post.teacher.name}</p>
+        <p>Postado: {dateFormated(post.createdat)}</p>
+        {/* <p>Criado por: {post.teacher.name}</p> */}
       </div>
     </div>
   );

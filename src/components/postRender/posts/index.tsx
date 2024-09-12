@@ -32,21 +32,21 @@ export function Posts({ post }: Props) {
   return (
     <div className={style.postContainer}>
       <div className={style.postImage}>
-        <img src={post.image} alt={`Imagem da postagem sobre ${post.title}`} />
+        <img src={post.urlimage} alt={`Imagem da postagem sobre ${post.title}`} />
       </div>
       <div className={style.postInfoWrapper}>
         <div className={style.postInfo}>
           <h2 onClick={() => navigate(`/post/${post.id}`)}>{post.title}</h2>
           <div className={style.postNotification}>
-            {postDate(post.createdAt) === 'New' ? (
+            {postDate(post.createdat) === 'New' ? (
               <span className={style.postNew}>New</span>
             ) : (
-              <span className={style.postOld}>{postDate(post.createdAt)}</span>
+              <span className={style.postOld}>{postDate(post.createdat)}</span>
             )}
           </div>
         </div>
         <div className={style.postDescription}>
-          <p>{post.content}</p>
+          <p>{post.content.slice(0, 80)}...</p>
         </div>
       </div>
     </div>

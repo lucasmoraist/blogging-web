@@ -1,10 +1,10 @@
 import { ITeacher } from "./teacher.interface";
 
 export interface IPost {
-    id: number;
+    id: string;
     title: string;
     content: string;
-    image?: string;
-    createdAt: string;
+    urlimage?: string;
+    createdat: string;
     teacher: ITeacher;
 }
