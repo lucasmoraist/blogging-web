@@ -3,7 +3,7 @@ import { Posts } from './posts';
 import { Post } from './postDetails';
 
 interface Props {
-  id?: number;
+  id?: string;
   post: IPost;
 }
 
