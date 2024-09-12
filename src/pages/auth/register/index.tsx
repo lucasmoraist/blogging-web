@@ -32,6 +32,7 @@ export function Register() {
           };
 
           registerData<ITeacher>({ url: '/teacher', data: teacher });
+          navigate('/login')
         }
       });
     } catch (error) {
@@ -77,7 +78,7 @@ export function Register() {
           <label>
             <span>Crie uma senha</span>
             <input
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
