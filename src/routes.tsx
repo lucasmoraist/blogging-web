@@ -13,7 +13,7 @@ export function AppRoutes() {
         <Routes>
           <Route path="/" element={<PageDefault isLogged={isLogged} />}>
             <Route index element={<Home />} />
-            <Route path="post/:id" element={<PostDetails />} />
+            <Route path="post/:postId" element={<PostDetails />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
