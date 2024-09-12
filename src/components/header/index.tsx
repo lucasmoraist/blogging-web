@@ -14,9 +14,14 @@ export function Header() {
   useEffect(() => {
     const dispose = autorun(() => {
       setIsLogged(authService.isLogged);
-    })
+    });
     return () => dispose();
-  }, [])
+  }, []);
+
+  const handleLogout = () => {
+    authService.logout(); // Chama o método de logout
+    navigate('/login'); // Redireciona para a página de login
+  };
 
   return (
     <header className={style.headerWrapper}>
@@ -39,14 +44,22 @@ export function Header() {
                 Profile
               </Link>
             </div>
-            <Link className={style.linkNavigate} to={'/logout'}>
-              Logout
-            </Link>
+            {isLogged ? (
+              <button className={style.linkNavigate} onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              ''
+            )}
           </div>
         ) : (
           <div className={style.buttons}>
-            <Button option="secondary" onClick={() => navigate('/register')}>Sign-up</Button>
-            <Button option="primary" onClick={() => navigate('/login')}>Sign-in</Button>
+            <Button option="secondary" onClick={() => navigate('/register')}>
+              Sign-up
+            </Button>
+            <Button option="primary" onClick={() => navigate('/login')}>
+              Sign-in
+            </Button>
           </div>
         )}
       </div>
