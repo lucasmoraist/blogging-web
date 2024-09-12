@@ -1,14 +1,23 @@
 import style from './header.module.scss';
 import logo from '/assets/img/logo.png';
 import { MenuHamburguer } from './menu-hamburguer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../button';
+import { authService } from '@/hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { autorun } from 'mobx';
 
-interface Props {
-  isLogged: boolean;
-}
+export function Header() {
+  const [isLogged, setIsLogged] = useState(authService.isLogged);
+  const navigate = useNavigate();
 
-export function Header({ isLogged }: Props) {
+  useEffect(() => {
+    const dispose = autorun(() => {
+      setIsLogged(authService.isLogged);
+    })
+    return () => dispose();
+  }, [])
+
   return (
     <header className={style.headerWrapper}>
       <div className={style.logo}>
@@ -36,8 +45,8 @@ export function Header({ isLogged }: Props) {
           </div>
         ) : (
           <div className={style.buttons}>
-            <Button option="secondary">Sign-up</Button>
-            <Button option="primary">Sign-in</Button>
+            <Button option="secondary" onClick={() => navigate('/register')}>Sign-up</Button>
+            <Button option="primary" onClick={() => navigate('/login')}>Sign-in</Button>
           </div>
         )}
       </div>
