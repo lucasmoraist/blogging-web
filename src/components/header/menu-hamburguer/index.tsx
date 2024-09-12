@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import style from './menu.module.scss';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../button';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 export function MenuHamburguer({ isLogged }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -52,8 +53,8 @@ export function MenuHamburguer({ isLogged }: Props) {
             </div>
           ) : (
             <>
-              <Button option="secondary">Sign-up</Button>
-              <Button option="primary">Sign-in</Button>
+              <Button option="secondary" onClick={() => navigate('/register')}>Sign-up</Button>
+              <Button option="primary" onClick={() => navigate('/login')}>Sign-in</Button>
             </>
           )}
         </ul>
