@@ -2,14 +2,10 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../header";
 import { Footer } from "../footer";
 
-interface Props {
-    isLogged: boolean;
-}
-
-export function PageDefault({ isLogged }: Props) {
+export function PageDefault() {
     return (
         <>
-            <Header isLogged={isLogged}/>
+            <Header />
 
             <Outlet />
 
