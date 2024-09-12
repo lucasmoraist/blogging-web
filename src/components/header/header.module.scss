@@ -28,21 +28,30 @@
     display: none;
 
     .links {
+      display: flex;
+      gap: 20px;
+
       div {
         gap: 20px;
-        .linkNavigate {
-          color: $mustard_yellow;
-          text-decoration: none;
-          font-size: 18px;
-          font-family: $roboto_font;
-          font-weight: bold;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-        }
       }
+
+      .linkNavigate {
+        color: $mustard_yellow;
+
+        text-decoration: none;
+        font-size: 18px;
+        font-family: $roboto_font;
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        background: none;
+        border: none;
+      }
+
     }
 
     .buttons {
@@ -55,7 +64,6 @@
     display: flex;
   }
 
-  // Media queries aninhadas
   @media (min-width: $mobile_md) and (max-width: $tablet_sml) {
     height: 70px;
 
@@ -81,19 +89,18 @@
 
     .menu {
       display: flex;
+
       .links {
         div {
           display: flex;
-
-          .linkNavigate:last-child {
-            display: flex;
-          }
-        }
-
-        .linkNavigate:last-child {
-          display: none;
         }
       }
+    }
+  }
+
+  @media (min-width: $desktop_sml) {
+    .linkNavigate {
+      cursor: pointer;
     }
   }
 
@@ -112,21 +119,14 @@
 
     .menu {
       display: flex;
+
       .links {
         div {
           display: flex;
-
-          .linkNavigate {
-            font-size: 22px;
-          }
-
-          .linkNavigate:last-child {
-            display: flex;
-          }
         }
 
-        .linkNavigate:last-child {
-          display: none;
+        .linkNavigate {
+          font-size: 22px;
         }
       }
     }
