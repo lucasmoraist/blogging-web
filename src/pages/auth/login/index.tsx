@@ -2,6 +2,8 @@ import { authService } from '@/hooks/useAuth';
 import { usePost } from '@/hooks/usePost';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import style from './login.module.scss';
+import { Button } from '@/components/button';
 
 export function Login() {
   const [username, setUsername] = useState('');
@@ -18,7 +20,7 @@ export function Login() {
     };
 
     try {
-      registerData({ url: '/user/signin', data: user }).then(response => {
+      registerData({ url: '/user/signin', data: user }).then((response) => {
         authService.login({ token: response.token });
       });
 
@@ -29,35 +31,38 @@ export function Login() {
   };
 
   return (
-    <section>
-      <div>
-        <h2>Entre com sua conta</h2>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <label>
-              <span>Nome de usuário</span>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </label>
+    <section className={style.sectionWrapper}>
+      <h2>Entre com sua conta</h2>
+      <form onSubmit={handleSubmit}>
+        <fieldset className={style.container}>
+          <label>
+            <span>Nome de usuário</span>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
 
-            <label>
-              <span>Senha</span>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </fieldset>
-          <button type='button' onClick={() => navigate('/')}>Voltar</button>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
+          <label>
+            <span>Senha</span>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+        </fieldset>
+
+        <div className={style.buttons}>
+        <Button option='secondary' type="button" onClick={() => navigate('/')}>
+            Voltar
+          </Button>
+          <Button option='primary' type="submit">Entrar</Button>
+        </div>
+      </form>
     </section>
   );
 }

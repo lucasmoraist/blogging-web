@@ -3,6 +3,8 @@ import { ITeacher } from '@/interface/teacher.interface';
 import { IUser } from '@/interface/user.interface';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import style from './register.module.scss';
+import { Button } from '@/components/button';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -38,58 +40,58 @@ export function Register() {
   };
 
   return (
-    <section>
-      <div>
-        <h2>Crie sua conta</h2>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <label>
-              <span>Nome do professor</span>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </label>
+    <section className={style.sectionWrapper}>
+      <h2>Crie sua conta</h2>
+      <form onSubmit={handleSubmit}>
+        <fieldset className={style.container}>
+          <label>
+            <span>Nome do professor</span>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </label>
 
-            <label>
-              <span>Escola onde atua</span>
-              <input
-                type="text"
-                value={school}
-                onChange={(e) => setSchool(e.target.value)}
-                required
-              />
-            </label>
+          <label>
+            <span>Escola onde atua</span>
+            <input
+              type="text"
+              value={school}
+              onChange={(e) => setSchool(e.target.value)}
+              required
+            />
+          </label>
 
-            <label>
-              <span>Crie um username</span>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </label>
+          <label>
+            <span>Crie um username</span>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
 
-            <label>
-              <span>Crie uma senha</span>
-              <input
-                type="text"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-          </fieldset>
+          <label>
+            <span>Crie uma senha</span>
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </fieldset>
 
-          <button type="button" onClick={() => navigate('/')}>
+        <div className={style.buttons}>
+          <Button option='secondary' type="button" onClick={() => navigate('/')}>
             Voltar
-          </button>
-          <button type="submit">Cadastrar</button>
-        </form>
-      </div>
+          </Button>
+          <Button option='primary' type="submit">Cadastrar</Button>
+        </div>
+      </form>
     </section>
   );
 }
