@@ -5,12 +5,12 @@ import { Form, Formik, FormikValues } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import style from './login.module.scss';
 import { authService } from '@/hooks/useAuth';
-import * as Yup  from 'yup';
+import * as Yup from 'yup';
 
 export function FormLogin() {
   const navigate = useNavigate();
 
-  const { registerData } = usePost();
+  const { registerData, error } = usePost();
 
   const handleSubmit = (values: FormikValues) => {
     const user = {
@@ -18,20 +18,20 @@ export function FormLogin() {
       password: values.password,
     };
 
-    try {
-      registerData({ url: '/user/signin', data: user }).then((response) => {
-        authService.login({ token: response.token });
-      });
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
+    registerData({ url: '/user/signin', data: user }).then((response) => {
+      if (response?.data.token === undefined) throw new Error();
+
+      if (response?.status === 200) {
+        authService.login({ token: response?.data.token });
+        navigate('/');
+      }
+    });
   };
 
   const schema = Yup.object().shape({
     username: Yup.string().required('Campo obrigatório'),
     password: Yup.string().required('Campo obrigatório'),
-  })
+  });
 
   return (
     <Formik
@@ -54,6 +54,10 @@ export function FormLogin() {
                 <Input title="Senha" name="password" type="password" />
               </label>
             </fieldset>
+
+            {error && (
+              <p style={{ color: 'red' }}>Email ou senha incorretos!</p>
+            )}
 
             <div className={style.buttons}>
               <Button
