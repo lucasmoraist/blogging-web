@@ -1,15 +1,22 @@
-import { Outlet } from "react-router-dom";
-import { Header } from "../header";
-import { Footer } from "../footer";
+import { Outlet } from 'react-router-dom';
+import { Header } from '../header';
+import { Footer } from '../footer';
 
 export function PageDefault() {
-    return (
-        <>
-            <Header />
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minHeight: '100vh',
+      }}
+    >
+      <Header />
 
-            <Outlet />
+      <Outlet />
 
-            <Footer />
-        </>
-    )
+      <Footer />
+    </div>
+  );
 }
