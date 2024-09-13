@@ -38,10 +38,10 @@ export function Header() {
         {isLogged ? (
           <div className={style.links}>
             <div>
-              <Link className={style.linkNavigate} to={'/signup'}>
+              <Link className={style.linkNavigate} to={'/admin/create'}>
                 <SquarePen /> Write
               </Link>
-              <Link className={style.linkNavigate} to={'/profile'}>
+              <Link className={style.linkNavigate} to={'/admin/posts'}>
                 <List /> Posts
               </Link>
             </div>
