@@ -1,5 +1,5 @@
 import { ErrorMessage, Field } from 'formik';
-import './input.module.scss';
+import style from './input.module.scss';
 
 interface Props {
   title: string;
@@ -9,9 +9,9 @@ interface Props {
 
 export function Input({ title, name, type }: Props) {
   return (
-    <>
+    <div className={style.inputComponent}>
       <span>{title}</span>
-      <Field type={type} name={name} required />
+      <Field type={type} name={name} required/>
       <ErrorMessage name={name}>
         {(msg) => (
           <div style={{ marginTop: '4px', width: '260px' }}>
@@ -19,6 +19,6 @@ export function Input({ title, name, type }: Props) {
           </div>
         )}
       </ErrorMessage>
-    </>
+    </div>
   );
 }
