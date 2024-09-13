@@ -24,7 +24,7 @@ export function FormRegister() {
           const teacher: ITeacher = {
             name: values.name,
             school_subject: values.school,
-            user_id: response.id,
+            user_id: response.data.id,
           };
 
           registerData<ITeacher>({ url: '/teacher', data: teacher });
