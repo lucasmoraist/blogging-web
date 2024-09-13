@@ -18,9 +18,9 @@ export function usePost(){
 
             setSucess(true);
             setResponse(response.data);
-            return response.data;
+            return response;
         } catch (error){
-            setError('Not possible to register');
+            setError('Possible internal server error');
         }
     }
 
