@@ -27,7 +27,7 @@ export function Header() {
   return (
     <header className={style.headerWrapper}>
       <div className={style.logo}>
-        <img src={logo} alt="Logo do blog" />
+        <Link to={'/'}><img src={logo} alt="Logo do blog" /></Link>
       </div>
 
       <div className={style.menuMobile}>
