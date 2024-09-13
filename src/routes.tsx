@@ -7,7 +7,7 @@ import { Register } from './pages/auth/register';
 import { Login } from './pages/auth/login';
 import { PrivateRoute } from './utils/privateRoute';
 import { ListPosts } from './pages/listPosts';
-import { CreatePost } from './pages/createPost';
+import { FormPost } from './pages/createPost';
 
 export function AppRoutes() {
   return (
@@ -20,8 +20,8 @@ export function AppRoutes() {
 
             <Route element={<PrivateRoute />}>
               <Route path='/admin/posts' element={<ListPosts />}/>
-              <Route path='/admin/create' element={<CreatePost />}/>
-              <Route path='/admin/update/:id' />
+              <Route path='/admin/create' element={<FormPost />}/>
+              <Route path='/admin/update/:id' element={<FormPost />}/>
               {/* Requisição de exclusão será apenas um botão para excluir */}
             </Route>
           </Route>
