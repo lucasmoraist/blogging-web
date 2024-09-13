@@ -1,10 +1,14 @@
 import { Input } from '@/components/input/input';
 import { usePost } from '@/hooks/usePost';
-import { Field, Form, Formik, FormikValues } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import style from './createPost.module.scss';
 import { Button } from '@/components/button';
+import { useEffect, useState } from 'react';
+import { http } from '@/utils/axios';
+import { NotFound } from '../notFound';
+import { IPost } from '@/interface/post.interface';
 
 interface RegisterPost {
   title: string;
@@ -13,13 +17,13 @@ interface RegisterPost {
   teacher_id: number;
 }
 
-export function CreatePost() {
+export function FormPost() {
   const { registerData, error } = usePost();
+  const [posts, setPosts] = useState<IPost>();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleSubmit = (values: FormikValues) => {
-    console.log(values);
-
     const post: RegisterPost = {
       title: values.title,
       content: values.content,
@@ -27,17 +31,44 @@ export function CreatePost() {
       teacher_id: 1,
     };
 
-    registerData<RegisterPost>({ url: '/admin/posts', data: post }).then(
-      (response) => {
+    if (id) {
+      registerData<RegisterPost>({
+        url: `/admin/posts/${id}`,
+        data: post,
+      }).then((response) => {
         console.log(response);
-        if (response?.status === 201) {
+        if (response?.status === 200) {
           navigate('/admin/posts');
         } else {
           console.log(error);
         }
-      }
-    );
+      });
+    } else {
+      registerData<RegisterPost>({ url: '/admin/posts', data: post }).then(
+        (response) => {
+          console.log(response);
+          if (response?.status === 201) {
+            navigate('/admin/posts');
+          } else {
+            console.log(error);
+          }
+        }
+      );
+    }
   };
+
+  useEffect(() => {
+    http()
+      .get(`/posts/${id}`)
+      .then((response) => {
+        setPosts(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
+  if (id && !posts) return <NotFound />;
 
   const schema = Yup.object().shape({
     title: Yup.string()
@@ -51,7 +82,7 @@ export function CreatePost() {
 
   return (
     <section className={style.sectionWrapper}>
-      <h2>Crie uma nova postagem</h2>
+      <h2>{id ? <p>Editar postagem</p> : <p>Crie uma nova postagem</p>}</h2>
       <Formik
         initialValues={{
           title: '',
@@ -66,18 +97,52 @@ export function CreatePost() {
             <Form onSubmit={formik.handleSubmit}>
               <fieldset className={style.container}>
                 <label>
-                  <Input title="Título" name="title" type="text" />
+                  {id ? (
+                    <Input
+                      title="Título"
+                      name="title"
+                      type="text"
+                      placeholder={posts?.title}
+                    />
+                  ) : (
+                    <Input title="Título" name="title" type="text" />
+                  )}
                 </label>
                 <label>
-                  <Input title="URL da imagem" name="urlImage" type="text" />
+                  {id ? (
+                    <Input
+                      title="URL da imagem"
+                      name="urlImage"
+                      type="text"
+                      placeholder={posts?.urlimage}
+                    />
+                  ) : (
+                    <Input title="URL da imagem" name="urlImage" type="text" />
+                  )}
                 </label>
                 <label className={style.textarea}>
                   <span>Conteúdo</span>
-                  <Field
-                    className={style.inputTextarea}
-                    name="content"
-                    as="textarea"
-                  />
+                  {id ? (
+                    <Field
+                      className={style.inputTextarea}
+                      name="content"
+                      as="textarea"
+                      placeholder={posts?.content}
+                    />
+                  ) : (
+                    <Field
+                      className={style.inputTextarea}
+                      name="content"
+                      as="textarea"
+                    />
+                  )}
+                  <ErrorMessage name="content">
+                    {(msg) => (
+                      <div style={{ marginTop: '4px', width: '260px' }}>
+                        <span style={{ color: 'red' }}>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
                 </label>
 
                 <div className={style.buttons}>
@@ -89,7 +154,7 @@ export function CreatePost() {
                     Voltar
                   </Button>
                   <Button option="primary" type="submit">
-                    Criar
+                    {id ? 'Editar' : 'Criar'}
                   </Button>
                 </div>
               </fieldset>
@@ -99,7 +164,9 @@ export function CreatePost() {
       </Formik>
       {error && (
         <p>
-          Não foi possível criar uma nova Postagem. Tente novamente mais tarde!
+          Não foi possível{' '}
+          {id ? 'editar a postagem' : 'criar uma nova Postagem'}. Tente
+          novamente mais tarde!
         </p>
       )}
     </section>
