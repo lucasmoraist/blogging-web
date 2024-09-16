@@ -7,9 +7,9 @@ import { IPost } from '@/interface/post.interface';
 
 interface Props {
   formik: FormikProps<{
-    title: string;
-    content: string;
-    urlImage: string;
+    title: string | undefined;
+    content: string | undefined;
+    urlImage: string | undefined;
   }>;
   posts: IPost | undefined;
   id: string | undefined;

@@ -17,10 +17,51 @@ interface RegisterPost {
 }
 
 export function FormPost() {
-  const { registerData, error } = usePost();
   const [posts, setPosts] = useState<IPost>();
+  
   const navigate = useNavigate();
   const { id } = useParams();
+  
+  const { registerData, error } = usePost();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await http().get(`/posts/${id}`);
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar o post:', error);
+      }
+    };
+
+    if (id) {
+      let isMounted = true;
+
+      fetchPost();
+
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [id]);
+
+  if (id && !posts) return <NotFound />;
+
+  const initialValues = {
+    title: posts?.title,
+    content: posts?.content,
+    urlImage: posts?.urlimage,
+  };
+
+  const schema = Yup.object().shape({
+    title: Yup.string()
+      .required('Campo obrigatório')
+      .max(255, 'Máximo de 255 caracteres'),
+    content: Yup.string()
+      .required('Campo obrigatório')
+      .min(200, 'Mínimo de 200 caracteres'),
+    urlImage: Yup.string().required('Campo obrigatório').url('URL inválida'),
+  });
 
   const handleSubmit = (values: FormikValues) => {
     const post: RegisterPost = {
@@ -56,53 +97,15 @@ export function FormPost() {
     }
   };
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await http().get(`/posts/${id}`);
-        setPosts(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar o post:', error);
-      }
-    };
-
-    if (id) {
-      let isMounted = true;
-
-      fetchPost();
-
-      return () => {
-        isMounted = false;
-      };
-    }
-  }, [id]);
-
-  if (id && !posts) return <NotFound />;
-
-  const schema = Yup.object().shape({
-    title: Yup.string()
-      .required('Campo obrigatório')
-      .max(255, 'Máximo de 255 caracteres'),
-    content: Yup.string()
-      .required('Campo obrigatório')
-      .min(200, 'Mínimo de 200 caracteres'),
-    urlImage: Yup.string().required('Campo obrigatório').url('URL inválida'),
-  });
-
   return (
     <section className={style.sectionWrapper}>
       <h2>{id ? <p>Editar postagem</p> : <p>Crie uma nova postagem</p>}</h2>
       <Formik
-        initialValues={{
-          title: '',
-          content: '',
-          urlImage: '',
-        }}
+        initialValues={initialValues}
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        {(formik) => <Form formik={formik} id={id} posts={posts}/> }
-        
+        {(formik) => <Form formik={formik} id={id} posts={posts} />}
       </Formik>
       {error && (
         <p>
