@@ -1,38 +1,60 @@
-import { PostRender } from '@/components/postRender';
 import style from './styles/home.module.scss';
 import { Aside } from './aside';
 import { useEffect, useState } from 'react';
 import { IPost } from '@/interface/post.interface';
 import { http } from '@/utils/axios';
 import { SearchForm } from './search';
+import { Feed } from './feed';
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const fetchPosts = async (signal: AbortSignal) => {
+    try {
+      const response = await http().get<IPost[]>('/posts', { signal });
+      return response.data;
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          console.log('Request canceled');
+        } else {
+          throw new Error('Error when searching for posts: ' + error.message);
+        }
+      } else {
+        throw new Error('Unexpected error');
+      }
+    }
+  }
 
   useEffect(() => {
-    http()
-      .get('/posts')
-      .then((response) => {
-        setPosts(response.data);
+    const controller = new AbortController();
+    fetchPosts(controller.signal)
+      .then(data => {
+        if (data) setPosts(data);
+        setLoading(true);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      })
+      .finally(() => setLoading(false));
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (
-      <div className={style.homeContainer}>
-        <div className={style.feed}>
+    <div className={style.homeContainer}>
+      <div className={style.feed}>
         <SearchForm />
-          {posts.slice(0, 5).map((post) => (
-            <div key={post.id}>
-              <PostRender post={post} />
-            </div>
-          ))}
-        </div>
-        <div className={style.randomPosts}>
-          <Aside posts={posts} />
-        </div>
+        {loading ? <p>loading...</p> : error ? <p>{error}</p> : <Feed posts={posts} />}
       </div>
+      <div className={style.randomPosts}>
+        <Aside posts={posts} />
+      </div>
+    </div>
   );
 }
