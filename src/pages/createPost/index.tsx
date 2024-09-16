@@ -1,14 +1,13 @@
-import { Input } from '@/components/input/input';
 import { usePost } from '@/hooks/usePost';
-import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import { Formik, FormikValues } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import style from './createPost.module.scss';
-import { Button } from '@/components/button';
 import { useEffect, useState } from 'react';
 import { http } from '@/utils/axios';
 import { NotFound } from '../notFound';
 import { IPost } from '@/interface/post.interface';
+import Form from './formTemplate';
 
 interface RegisterPost {
   title: string;
@@ -58,14 +57,24 @@ export function FormPost() {
   };
 
   useEffect(() => {
-    http()
-      .get(`/posts/${id}`)
-      .then((response) => {
+    const fetchPost = async () => {
+      try {
+        const response = await http().get(`/posts/${id}`);
         setPosts(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      } catch (error) {
+        console.error('Erro ao buscar o post:', error);
+      }
+    };
+
+    if (id) {
+      let isMounted = true;
+
+      fetchPost();
+
+      return () => {
+        isMounted = false;
+      };
+    }
   }, [id]);
 
   if (id && !posts) return <NotFound />;
@@ -92,75 +101,8 @@ export function FormPost() {
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        {(formik) => {
-          return (
-            <Form onSubmit={formik.handleSubmit}>
-              <fieldset className={style.container}>
-                <label>
-                  {id ? (
-                    <Input
-                      title="Título"
-                      name="title"
-                      type="text"
-                      placeholder={posts?.title}
-                    />
-                  ) : (
-                    <Input title="Título" name="title" type="text" />
-                  )}
-                </label>
-                <label>
-                  {id ? (
-                    <Input
-                      title="URL da imagem"
-                      name="urlImage"
-                      type="text"
-                      placeholder={posts?.urlimage}
-                    />
-                  ) : (
-                    <Input title="URL da imagem" name="urlImage" type="text" />
-                  )}
-                </label>
-                <label className={style.textarea}>
-                  <span>Conteúdo</span>
-                  {id ? (
-                    <Field
-                      className={style.inputTextarea}
-                      name="content"
-                      as="textarea"
-                      placeholder={posts?.content}
-                    />
-                  ) : (
-                    <Field
-                      className={style.inputTextarea}
-                      name="content"
-                      as="textarea"
-                    />
-                  )}
-                  <ErrorMessage name="content">
-                    {(msg) => (
-                      <div style={{ marginTop: '4px', width: '260px' }}>
-                        <span style={{ color: 'red' }}>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
-                </label>
-
-                <div className={style.buttons}>
-                  <Button
-                    option="secondary"
-                    type="button"
-                    onClick={() => navigate('/')}
-                  >
-                    Voltar
-                  </Button>
-                  <Button option="primary" type="submit">
-                    {id ? 'Editar' : 'Criar'}
-                  </Button>
-                </div>
-              </fieldset>
-            </Form>
-          );
-        }}
+        {(formik) => <Form formik={formik} id={id} posts={posts}/> }
+        
       </Formik>
       {error && (
         <p>
