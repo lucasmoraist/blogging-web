@@ -4,11 +4,11 @@ import { MenuHamburguer } from './menu-hamburguer';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../button';
 import { authService } from '@/hooks/useAuth';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { autorun } from 'mobx';
 import { List, LogOut, SquarePen } from 'lucide-react';
 
-export function Header() {
+function Header() {
   const [isLogged, setIsLogged] = useState(authService.isLogged);
   const navigate = useNavigate();
 
@@ -67,3 +67,5 @@ export function Header() {
     </header>
   );
 }
+
+export default memo(Header);
