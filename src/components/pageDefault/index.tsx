@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../header';
-import { Footer } from '../footer';
+import Header from '../header';
+import Footer from '../footer';
+import { memo } from 'react';
 
-export function PageDefault() {
+function PageDefault() {
   return (
     <div
       style={{
@@ -20,3 +21,5 @@ export function PageDefault() {
     </div>
   );
 }
+
+export default memo(PageDefault);
