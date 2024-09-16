@@ -1,8 +1,8 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input/input';
-import { ErrorMessage, Field, FormikProps } from 'formik';
-import { Form, useNavigate } from 'react-router-dom';
-import style from './createPost.module.scss';
+import { ErrorMessage, Field, Form, FormikProps } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import style from './styles/createPost.module.scss';
 import { IPost } from '@/interface/post.interface';
 
 interface Props {
