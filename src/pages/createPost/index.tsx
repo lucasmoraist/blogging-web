@@ -2,7 +2,7 @@ import { usePost } from '@/hooks/usePost';
 import { Formik, FormikValues } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
-import style from './createPost.module.scss';
+import style from './styles/createPost.module.scss';
 import { useEffect, useState } from 'react';
 import { http } from '@/utils/axios';
 import { NotFound } from '../notFound';
