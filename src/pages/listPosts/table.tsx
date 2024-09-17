@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -5,15 +6,13 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
+  TablePagination,
 } from '@mui/material';
 import { Pencil, Trash } from 'lucide-react';
-import style from './listPosts.module.scss';
 import { http } from '@/utils/axios';
-
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import style from './listPosts.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface PostAdmin {
   id: string;
@@ -28,22 +27,39 @@ export function TableComponent() {
   const [posts, setPosts] = useState<PostAdmin[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPosts, setTotalPosts] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
+    fetchPosts();
+  }, [page, rowsPerPage]);
+
+  const fetchPosts = () => {
     http()
-      .get('/admin/posts')
+      .get(`/admin/posts?page=${page + 1}&limit=${rowsPerPage}`)
       .then((response) => {
-        setPosts(response.data);
+        // Assumindo que a resposta é um array de posts e contém a quantidade total de posts
+        if (Array.isArray(response.data)) {
+          setPosts(response.data);
+          // Se você tiver um endpoint separado para obter o total de posts, ajuste aqui
+          setTotalPosts(response.data.length); // Ajuste conforme a resposta da API
+        } else {
+          console.error('Resposta da API não é um array:', response.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar posts:', error);
       });
-  }, []);
+  };
 
   const deletePost = (postId: string) => {
     http()
       .delete(`/admin/posts/${postId}`)
       .then(() => {
-        const listPost = posts.filter((post) => post.id !== postId);
-        setPosts([...listPost]);
+        fetchPosts(); // Recarregar a lista de posts após exclusão
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir post:', error);
       });
   };
 
@@ -89,15 +105,10 @@ export function TableComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {posts
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((post) => (
-              <TableRow key={post.id} className={style.tableRowBody}>
-                <TableCell>
-                  <Link to={'/admin/update'} className={style.link}>
-                    {post.title}
-                  </Link>
-                </TableCell>
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <TableRow key={post.id}>
+                <TableCell>{post.title}</TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>{post.name}</TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>
                   {post.school_subject}
@@ -123,16 +134,24 @@ export function TableComponent() {
                   </button>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} align="center">
+                Nenhum post encontrado
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
         <TablePagination
           component="div"
-          count={posts.length} // Total de posts
-          page={page} // Página atual
-          onPageChange={handleChangePage} // Função que muda a página
-          rowsPerPage={rowsPerPage} // Quantidade de itens por página
-          onRowsPerPageChange={handleChangeRowsPerPage} // Função que muda quantos itens exibir por página
+          count={totalPosts}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
           labelRowsPerPage="Linhas por página:"
+          rowsPerPageOptions={[5, 10, 25]}
         />
       </Table>
     </TableContainer>
