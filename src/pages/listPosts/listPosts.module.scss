@@ -50,28 +50,28 @@
                 text-decoration: none;
             }
 
-            button {
-                border: none;
-                background: transparent;
-            }
+        }
+        button {
+            border: none;
+            background: transparent;
+        }
 
-            .edit {
-                svg {
-                    cursor: pointer;
+        .edit {
+            svg {
+                cursor: pointer;
 
-                    &:hover {
-                        color: rgb(9, 9, 244);
-                    }
+                &:hover {
+                    color: rgb(9, 9, 244);
                 }
             }
+        }
 
-            .delete {
-                svg {
-                    cursor: pointer;
+        .delete {
+            svg {
+                cursor: pointer;
 
-                    &:hover {
-                        color: rgb(244, 9, 9);
-                    }
+                &:hover {
+                    color: rgb(244, 9, 9);
                 }
             }
         }
