@@ -3,7 +3,7 @@ import style from './styles/search.module.scss';
 import { http } from '@/utils/axios';
 import { Search } from 'lucide-react';
 
-export function SearchForm() {
+export function SearchForm(): JSX.Element {
   const [search, setSearch] = useState<string>('');
 
   // Definir oque irá acontecer após a busca

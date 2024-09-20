@@ -15,7 +15,7 @@ interface Props {
   id: string | undefined;
 }
 
-export default function FormTemplate({ formik, posts, id }: Props) {
+export default function FormTemplate({ formik, posts, id }: Props): JSX.Element {
   const navigate = useNavigate();
   return (
     <Form onSubmit={formik.handleSubmit}>

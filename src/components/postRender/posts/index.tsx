@@ -6,7 +6,7 @@ interface Props {
   post: IPost;
 }
 
-export function Posts({ post }: Props) {
+export function Posts({ post }: Props): JSX.Element {
   const navigate = useNavigate();
 
   const postDate = (date: string) => {
@@ -37,17 +37,18 @@ export function Posts({ post }: Props) {
       <div className={style.postInfoWrapper}>
         <div className={style.postInfo}>
           <h2 onClick={() => navigate(`/post/${post.id}`)}>{post.title}</h2>
-          <div className={style.postNotification}>
+          
+        </div>
+        <div className={style.postDescription}>
+          <p>{post.content.slice(0, 80)}...</p>
+        </div>
+        <div className={style.postNotification}>
             {postDate(post.createdat) === 'New' ? (
               <span className={style.postNew}>New</span>
             ) : (
               <span className={style.postOld}>{postDate(post.createdat)}</span>
             )}
           </div>
-        </div>
-        <div className={style.postDescription}>
-          <p>{post.content.slice(0, 80)}...</p>
-        </div>
       </div>
     </div>
   );

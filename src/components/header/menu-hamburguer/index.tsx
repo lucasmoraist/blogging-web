@@ -9,7 +9,7 @@ interface Props {
   isLogged: boolean;
 }
 
-export function MenuHamburguer({ isLogged }: Props) {
+export function MenuHamburguer({ isLogged }: Props): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export function MenuHamburguer({ isLogged }: Props) {
             <div className={style.links}>
             <div>
               <Link className={style.linkNavigate} to={'/admin/create'}>
-                <SquarePen /> Write
+                <SquarePen /> Escrever Post
               </Link>
               <Link className={style.linkNavigate} to={'/admin/posts'}>
                 <List /> Posts
@@ -55,7 +55,7 @@ export function MenuHamburguer({ isLogged }: Props) {
             </div>
             {isLogged ? (
               <button className={style.linkNavigate} onClick={handleLogout}>
-                <LogOut /> Logout
+                <LogOut /> Sair
               </button>
             ) : (
               ''
@@ -63,8 +63,8 @@ export function MenuHamburguer({ isLogged }: Props) {
           </div>
           ) : (
             <>
-              <Button option="secondary" onClick={() => navigate('/register')}>Sign-up</Button>
-              <Button option="primary" onClick={() => navigate('/login')}>Sign-in</Button>
+              <Button option="secondary" onClick={() => navigate('/register')}>Cadastre-se</Button>
+              <Button option="primary" onClick={() => navigate('/login')}>Entrar</Button>
             </>
           )}
         </ul>

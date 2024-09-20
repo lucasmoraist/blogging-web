@@ -65,7 +65,7 @@
         }
     }
 
-    @media (min-width: $tablet_sml) {
+    @media (min-width: $tablet) {
         h2 {
             font-size: 48px;
         }
@@ -89,7 +89,7 @@
         }
     }
 
-    @media (min-width: $desktop_sml) {
+    @media (min-width: $desktop) {
         h2 {
             font-size: 64px;
         }

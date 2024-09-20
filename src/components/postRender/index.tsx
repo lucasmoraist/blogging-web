@@ -8,8 +8,8 @@ interface Props {
   post: IPost;
 }
 
-export const PostRender = memo(({ id, post }: Props) => {
+export const PostRender = memo(({ id, post }: Props): JSX.Element => {
   return <>{id === post.id ? <Post post={post} /> : <Posts post={post} />}</>;
-})
+});
 
 

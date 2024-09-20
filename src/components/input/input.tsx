@@ -8,7 +8,7 @@ interface Props {
   placeholder?: string;
 }
 
-export function Input({ title, name, type, placeholder }: Props) {
+export function Input({ title, name, type, placeholder }: Props): JSX.Element {
   return (
     <div className={style.inputComponent}>
       <span>{title}</span>

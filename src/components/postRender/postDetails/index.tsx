@@ -5,7 +5,7 @@ interface Props {
   post: IPost;
 }
 
-export function Post({ post }: Props) {
+export function Post({ post }: Props): JSX.Element {
   const dateFormated = (date: string) => {
     const postDate = new Date(date);
 

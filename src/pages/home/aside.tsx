@@ -10,7 +10,7 @@ interface Props {
 // Idéia:
 // De início os posts que irão aparecer na lateral podem ser apenas posts aleatórios
 // Mas pode-se mudar o objetivo e mostrar apenas os posts melhores avaliados
-export function Aside({ posts }: Props) {
+export function Aside({ posts }: Props): JSX.Element {
   const [randomPosts, setRandomPosts] = useState<IPost[]>([]);
   const navigate = useNavigate();
   

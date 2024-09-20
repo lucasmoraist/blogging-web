@@ -16,7 +16,7 @@
     display: none;
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $desktop) {
     justify-content: space-around;
 
     .randomPosts {
@@ -24,7 +24,7 @@
     }
   }
 
-  @media (min-width: $desktop_md) {
+  @media (min-width: $desktop) {
     padding: 58px 161px 90px 161px;
   }
 }

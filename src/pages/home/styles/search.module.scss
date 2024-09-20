@@ -3,14 +3,13 @@
 
 .searchWrapper {
     display: flex;
-    width: 100%;
     justify-content: center;
+    padding: 12px;
 
     .search {
-        width: 254px;
+        width: auto;
         background-color: #fff;
         display: flex;
-        align-items: center;
         padding-right: 10px;
         border-radius: 30px;
 
@@ -40,8 +39,9 @@
         }
     }
 
-    @media (min-width: $tablet_sml) {
-        width: 676px;
-        justify-content: start
+    @media (max-width: $tablet) {
+        width: auto;
+        justify-content: start;
     }
+
 }

@@ -3,12 +3,9 @@
 
 .headerWrapper {
   background-color: $secondary_color;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  width: 100%;
+  width: auto;
   height: 61px;
 
   padding: 0 20px;
@@ -26,6 +23,8 @@
 
   .menu {
     display: none;
+    position: absolute;
+    right: 16px;
 
     .links {
       display: flex;
@@ -53,7 +52,6 @@
       }
 
     }
-
     .buttons {
       display: flex;
       gap: 15px;
@@ -64,7 +62,7 @@
     display: flex;
   }
 
-  @media (min-width: $mobile_md) and (max-width: $tablet_sml) {
+  @media (min-width: mobile) and (max-width: $tablet) {
     height: 70px;
 
     .logo {
@@ -74,7 +72,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) and (max-width: $desktop_md) {
+  @media (min-width: $tablet) and (max-width: $desktop) {
     height: 100px;
 
     .logo {
@@ -98,13 +96,13 @@
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $desktop) {
     .linkNavigate {
       cursor: pointer;
     }
   }
 
-  @media (min-width: $desktop_lg) {
+  @media (min-width: $desktop) {
     height: 100px;
 
     .logo {

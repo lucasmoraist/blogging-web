@@ -3,7 +3,6 @@ import { Aside } from './aside';
 import { useEffect, useState } from 'react';
 import { IPost } from '@/interface/post.interface';
 import { http } from '@/utils/axios';
-import { SearchForm } from './search';
 import { Feed } from './feed';
 
 export function Home() {
@@ -26,7 +25,7 @@ export function Home() {
         throw new Error('Unexpected error');
       }
     }
-  }
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -48,13 +47,13 @@ export function Home() {
 
   return (
     <div className={style.homeContainer}>
-      <div className={style.feed}>
-        <SearchForm />
-        {loading ? <p>loading...</p> : error ? <p>{error}</p> : <Feed posts={posts} />}
-      </div>
       <div className={style.randomPosts}>
         <Aside posts={posts} />
       </div>
+      <div className={style.feed}>
+        {loading ? <p>loading...</p> : error ? <p>{error}</p> : <Feed posts={posts} />}
+      </div>
+
     </div>
   );
 }

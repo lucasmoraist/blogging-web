@@ -4,9 +4,7 @@
 .btn {
   width: 145px;
   height: 40px;
-
   border-radius: 31px;
-
   font-family: $roboto_font;
   font-size: 16px;
   line-height: auto;
@@ -24,14 +22,14 @@
   color: $lime_green;
 }
 
-@media (min-width: $tablet_sml) and (max-width: $desktop_sml) {
+@media (min-width: $tablet) and (max-width: $desktop) {
   .btn {
     width: 96px;
     height: 31px;
   }
 }
 
-@media (min-width: $desktop_sml) {
+@media (min-width: $desktop) {
   .btn {
     cursor: pointer;
     &:hover {
@@ -45,7 +43,7 @@
   }
 }
 
-@media (min-width: $desktop_lg) {
+@media (min-width: $desktop) {
   .btn {
     width: 120px;
     height: 40px;

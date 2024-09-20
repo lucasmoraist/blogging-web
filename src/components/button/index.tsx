@@ -1,4 +1,4 @@
-import style from './button.module.scss'
+import style from './button.module.scss';
 
 interface Props {
     children: React.ReactNode;
@@ -7,7 +7,7 @@ interface Props {
     type?: 'button' | 'submit' | 'reset';
 }
 
-export function Button({ children, option, onClick, type }: Props) {
+export function Button({ children, option, onClick, type }: Props): JSX.Element {
     return (
         <>
             {option === 'primary' ? (
