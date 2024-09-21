@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ITeacher } from '@/interface/teacher.interface';
-import strings from './scripts/strings';
+import { strings } from './scripts/constants';
 
 interface BlogPost {
   title: string;
@@ -85,7 +85,7 @@ export default TeachersMenu;
 const StyledMenuContainer = styled.div`
   display: flex;
   flex-direction: row;
-  height: 200vh;
+  height: 100%;
   margin-left: 12px;
 `;  
 const StyledTeachersMenuTitle = styled.span`

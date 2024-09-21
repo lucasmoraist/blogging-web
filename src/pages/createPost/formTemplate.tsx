@@ -33,6 +33,8 @@ export default function FormTemplate({ formik, posts, id }: Props): JSX.Element 
           )}
         </label>
         <label>
+        </label>
+        <label>
           {id ? (
             <Input
               title="URL da imagem"

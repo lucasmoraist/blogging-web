@@ -1,153 +1,30 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IPost } from '@/interface/post.interface';
-import { http } from '@/utils/axios';
 import PostCard from './posts-card';
 import strings from '../scripts/strings';
+import { IPost } from '@/interface/post.interface';
+import { schoolSubjects } from '../scripts/constants';
+
+interface Props {
+  posts: IPost[];
+}
 
 
-const PostsContainer = (): JSX.Element => {
-  const [posts, setPosts] = useState<IPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const fetchPosts = async (signal: AbortSignal) => {
-    try {
-      const response = await http().get<IPost[]>('/posts', { signal });
-      return response.data;
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
-        } else {
-          throw new Error('Error when searching for posts: ' + error.message);
-        }
-      } else {
-        throw new Error('Unexpected error');
-      }
-    }
-  };
-    useEffect(() => {
-    const controller = new AbortController();
-    fetchPosts(controller.signal)
-      .then(data => {
-        if (data) setPosts(data);
-        setLoading(true);
-      })
-      .catch(error => {
-        setError(error.message);
-        setLoading(false);
-      })
-      .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
+const PostsContainer = ({ posts }: Props): JSX.Element => {
     return (
       <StyledPostsContainer>
-        <StyledSubjectName>{strings.SUBJECT.BIOLOGIA}</StyledSubjectName>
-        <StyledSubjectSubtitle>{strings.SUBJECT.BIOLOGIA_SUB}
-        </StyledSubjectSubtitle>
+
+        {schoolSubjects.map((subject) => ( 
+          <>
+          <StyledSubjectName>{subject.label}</StyledSubjectName>
+          <StyledSubjectSubtitle>{subject.description}</StyledSubjectSubtitle>
+          </>
+        ))}
       <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
+          {posts.length > 0 && posts.map((item, index) => (
+            <li key={index}>
               <PostCard
                 post={item} />
             </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.FISICA}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.FISICA_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.GEOGRAFIA}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.GEOGRAFIA_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.HISTORIA}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.HISTORIA_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.INGLES}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.INGLES_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.MATEMATICA}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.MATEMATICA_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.PORTUGUES}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.PORTUGUES_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
-          ))}
-        </StyledPostsContainerUl>
-          <StyledSubjectName>{strings.SUBJECT.QUIMICA}</StyledSubjectName>
-          <StyledSubjectSubtitle>{strings.SUBJECT.QUIMICA_SUB}
-          </StyledSubjectSubtitle>
-      <StyledPostsContainerUl>
-          {posts.map((item, index) => (
-            index < 5 && (
-            <li key={item.id}>
-              <PostCard
-                post={item} />
-            </li>
-            )
           ))}
         </StyledPostsContainerUl>
         </StyledPostsContainer>

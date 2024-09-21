@@ -53,7 +53,7 @@ export function Home() {
         <TeachersMenu teachers />
         {/* <Aside posts={posts} /> */}
       </div>
-      <PostsContainer />
+      <PostsContainer posts={posts} />
 {/*       <div className={style.feed}>
         {loading ? <p>loading...</p> : error ? <p>{error}</p> : <Feed posts={posts} />}
       </div> */}

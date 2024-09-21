@@ -1,6 +1,5 @@
 import { IPost } from '@/interface/post.interface';
-import { http } from '@/utils/axios';
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface Props {
@@ -8,45 +7,7 @@ interface Props {
 };
 
 const PostCard = ({ post } : Props): JSX.Element => {
-  const [posts, setPosts] = useState<IPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const fetchPosts = async (signal: AbortSignal, id: string) => {
-    try {
-      const response = await http().get<IPost[]>(`/posts/${id}`, { signal });
-      return response.data;
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
-        } else {
-          throw new Error('Error when fetching post: ' + error.message);
-        }
-      } else {
-        throw new Error('Unexpected error');
-      }
-    }
-  };
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchPosts(controller.signal, post.id)
-      .then(data => {
-        if (data) setPosts(data);
-        setLoading(true);
-      })
-      .catch(error => {
-        setError(error.message);
-        setLoading(false);
-      })
-      .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
-  }, [post.id]);
-
+  const navigate = useNavigate();
 
   const trimText = (text: string, maxLength: number = 160): string => {
     if (text.length > maxLength) {
@@ -58,12 +19,12 @@ const PostCard = ({ post } : Props): JSX.Element => {
   const trimmedContent = trimText(post.content);
   
   const onClickPostDetailPage = () => {
-
+    navigate(post.id);
   };
-
+  console.log('POST TEST', post);
   return (
     <StyledPostCard post={post}>
-        <StyledPostCardTitle onClick={() => {onClickPostDetailPage();}}>
+        <StyledPostCardTitle onClick={() => onClickPostDetailPage()}>
             {post.title}
         </StyledPostCardTitle>
         <StyledPostContent>
@@ -86,6 +47,7 @@ const StyledPostCard = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
+  min-height: 170px;
 `;
 
 const StyledPostCardTitle = styled.a`
