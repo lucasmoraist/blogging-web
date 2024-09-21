@@ -1,4 +1,4 @@
-import { ITeacher } from "./teacher.interface";
+import { ITeacher } from './teacher.interface';
 
 export interface IPost {
     id: string;

@@ -1,5 +1,5 @@
 import style from './header.module.scss';
-import logo from '/assets/img/logo.png';
+import logo from '/assets/img/school_blog.png';
 import { MenuHamburguer } from './menu-hamburguer';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../button';

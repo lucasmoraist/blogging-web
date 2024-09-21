@@ -12,14 +12,14 @@
 
 .btnPrimary {
   border: none;
-  background-color: $lime_green;
+  background-color: $orange;
   color: #fff;
 }
 
 .btnSecondary {
-  border: 2px solid $lime_green;
+  border: 2px solid $orange;
   background-color: transparent;
-  color: $lime_green;
+  color: $orange;
 }
 
 @media (min-width: $tablet) and (max-width: $desktop) {

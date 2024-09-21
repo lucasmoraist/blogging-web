@@ -1,9 +1,11 @@
 import style from './styles/home.module.scss';
-import { Aside } from './aside';
+// import { Aside } from './aside';
 import { useEffect, useState } from 'react';
 import { IPost } from '@/interface/post.interface';
 import { http } from '@/utils/axios';
-import { Feed } from './feed';
+/* import { Feed } from './feed'; */
+import  PostsContainer from '../home-2/posts-container/posts-container';
+import TeachersMenu from '../home-2/teachers-menu';
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -48,11 +50,13 @@ export function Home() {
   return (
     <div className={style.homeContainer}>
       <div className={style.randomPosts}>
-        <Aside posts={posts} />
+        <TeachersMenu teachers />
+        {/* <Aside posts={posts} /> */}
       </div>
-      <div className={style.feed}>
+      <PostsContainer />
+{/*       <div className={style.feed}>
         {loading ? <p>loading...</p> : error ? <p>{error}</p> : <Feed posts={posts} />}
-      </div>
+      </div> */}
 
     </div>
   );

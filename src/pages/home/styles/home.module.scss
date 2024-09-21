@@ -3,7 +3,7 @@
 
 .homeContainer {
   display: flex;
-  padding: 58px 0 90px 0;
+  padding: 16px 0 16px 0;
   justify-content: center;
 
   .feed {
@@ -22,9 +22,5 @@
     .randomPosts {
       display: flex;
     }
-  }
-
-  @media (min-width: $desktop) {
-    padding: 58px 161px 90px 161px;
   }
 }

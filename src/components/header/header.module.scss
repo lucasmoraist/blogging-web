@@ -7,17 +7,15 @@
   align-items: center;
   width: auto;
   height: 61px;
-
   padding: 0 20px;
 
   .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    img {
-      width: auto;
-      height: 19px;
+     img {
+      width: 54px;
+      height: 54px;
     }
   }
 
@@ -29,6 +27,7 @@
     .links {
       display: flex;
       gap: 20px;
+      cursor: pointer;
 
       div {
         gap: 20px;
@@ -62,7 +61,7 @@
     display: flex;
   }
 
-  @media (min-width: mobile) and (max-width: $tablet) {
+  @media (min-width: $tablet) and (max-width: $desktop) {
     height: 70px;
 
     .logo {
@@ -74,10 +73,9 @@
 
   @media (min-width: $tablet) and (max-width: $desktop) {
     height: 100px;
-
     .logo {
       img {
-        height: 34px;
+        height: 64px;
       }
     }
 
@@ -89,6 +87,7 @@
       display: flex;
 
       .links {
+        cursor: pointer;
         div {
           display: flex;
         }
@@ -104,21 +103,19 @@
 
   @media (min-width: $desktop) {
     height: 100px;
-
     .logo {
       img {
-        height: 34px;
+        height: 54px;
       }
     }
-
     .menuMobile {
       display: none;
     }
-
     .menu {
       display: flex;
 
       .links {
+        cursor: pointer;
         div {
           display: flex;
         }
