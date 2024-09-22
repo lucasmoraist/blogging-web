@@ -6,6 +6,7 @@ export function http() {
     if (!token) redirect('/login');
 
     return axios.create({
+        // baseURL: 'http://localhost:3000/',
         baseURL: 'https://tech-challenge2.grupo8.tech/',
         headers: {
             'Content-Type': 'application/json',

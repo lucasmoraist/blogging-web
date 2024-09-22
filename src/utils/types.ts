@@ -1,1 +1,0 @@
-export interface Subjects = 'Português' | 'Matemática' | 'Química' | 'Física' | 'História' | 'Geografia' | 'Inglês';

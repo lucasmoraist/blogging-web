@@ -1,5 +1,5 @@
-import { http } from "@/utils/axios";
-import { useState } from "react";
+import { http } from '@/utils/axios';
+import { useState } from 'react';
 
 export function usePost(){
     const [error, setError] = useState('');
@@ -9,7 +9,7 @@ export function usePost(){
     async function registerData<T>({ url, data, token }: { url: string, data: T, token?: string }) {
         const headers: HeadersInit = {
             'Content-Type': 'application/json',
-        }
+        };
 
         if (token) headers['Authorization'] = `Bearer ${token}`;
 

@@ -1,5 +1,5 @@
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import style from './not-found.module.scss';
 
 export function NotFound() {

@@ -10,6 +10,6 @@ export const schoolSubjects = [
   ];
 
 export const strings = {
-    ELLIPSIS: '...',
-    TEACHER_MENU_TITLE: 'Veja os posts por professor!'
+    TEACHER_MENU_TITLE: 'Veja os posts por professor!',
+    SRP_TITLE: 'A sua busca retornou QTD esses posts:' // TODO: add dynamic qty after implementation
 };

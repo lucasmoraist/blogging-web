@@ -68,6 +68,9 @@ export function FormRegister() {
                 <Input title="Nome do professor" name="name" type="text" />
               </label>
               <label>
+        
+                <label className={style.subjectLabel}>Matéria</label>
+        
                 <Field
                   name="school_subject"
                   as="select"
@@ -104,7 +107,10 @@ export function FormRegister() {
               >
                 Voltar
               </Button>
-              <Button option="primary" type="submit">
+              <Button 
+                option="primary" 
+                type="submit"
+              >
                 Cadastrar
               </Button>
             </div>

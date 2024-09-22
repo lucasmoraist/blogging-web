@@ -3,22 +3,22 @@ import styled from 'styled-components';
 import { ITeacher } from '@/interface/teacher.interface';
 import { strings } from './scripts/constants';
 
-interface BlogPost {
-  title: string;
-  content: string;
-}
+// interface BlogPost {
+//   title: string;
+//   content: string;
+// }
 
-interface Teacher {
-  id: number;
-  name: string;
-  blogPosts: BlogPost[];
-}
+// interface Teacher {
+//   id: number;
+//   name: string;
+//   blogPosts: BlogPost[];
+// }
 
-interface TeachersMenuProps {
-  teachers: Teacher[];
-}
+// interface TeachersMenuProps {
+//   teachers: Teacher[];
+// }
 
-const TeachersMenu: React.FC<TeachersMenuProps> = ({ teachers }): JSX.Element => {
+const TeachersMenu: React.FC<TeachersMenuProps> = ({ posts }: Props): JSX.Element => {
   const [selectedTeacher, setSelectedTeacher] = useState<ITeacher[]>([]);
 
   const handleTeacherSelect = (teacher: Teacher) => {
