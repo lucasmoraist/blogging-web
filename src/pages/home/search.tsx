@@ -2,7 +2,6 @@ import { useState } from 'react';
 import style from './styles/search.module.scss';
 import { http } from '@/utils/axios';
 import { Search } from 'lucide-react';
-import SearchResultPage from '../home-2/srp/search-result-page';
 import { useNavigate } from 'react-router-dom';
 
 export function SearchForm(): JSX.Element {
@@ -23,7 +22,6 @@ export function SearchForm(): JSX.Element {
           console.log(response.data);
           if (response.data.length > 0) {
             navigate(`/posts/search/${search}`);
-            <SearchResultPage posts={response.data} />;
           } else {
             console.log('NOT FOUND'); //TODO: create ZERO results component
           }

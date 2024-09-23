@@ -1,47 +1,47 @@
-@import '@/styles/_variables';
-@import '@/styles/_breakpoints';
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
 
 .searchWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .search {
+    width: 254px;
+    background-color: #fff;
     display: flex;
-    justify-content: center;
-    padding: 12px;
+    align-items: center;
+    padding-right: 10px;
+    border-radius: 30px;
 
-    .search {
-        width: auto;
-        background-color: #fff;
-        display: flex;
-        padding-right: 10px;
-        border-radius: 30px;
+    input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 30px;
+      padding: 0 10px;
+      font-size: 16px;
+      background: transparent;
+      cursor: text;
 
-        input {
-            width: 100%;
-            height: 40px;
-            border: none;
-            border-radius: 30px;
-            padding: 0 10px;
-            font-size: 16px;
-            background: transparent;
-            cursor: text;
-
-            &:focus {
-                outline: none;
-                border: none;
-            }
-        }
-
-        button {
-            background: transparent;
-            border: none;
-
-            svg {
-                cursor: pointer;
-            }
-        }
+      &:focus {
+        outline: none;
+        border: none;
+      }
     }
 
-    @media (max-width: $tablet) {
-        width: auto;
-        justify-content: start;
-    }
+    button {
+      background: transparent;
+      border: none;
 
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (min-width: $tablet_sml) {
+    width: 676px;
+    justify-content: start;
+  }
 }

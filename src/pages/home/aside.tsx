@@ -1,7 +1,7 @@
-import { IPost } from '@/interface/post.interface';
-import style from './styles/aside.module.scss';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { IPost } from "@/interface/post.interface";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 interface Props {
   posts: IPost[];
@@ -13,7 +13,7 @@ interface Props {
 export function Aside({ posts }: Props): JSX.Element {
   const [randomPosts, setRandomPosts] = useState<IPost[]>([]);
   const navigate = useNavigate();
-  
+
   const getRandomPosts = (postList: IPost[], count: number): IPost[] => {
     return postList.sort(() => Math.random() - 0.5).slice(0, count);
   };
@@ -23,20 +23,61 @@ export function Aside({ posts }: Props): JSX.Element {
     setRandomPosts(selectedPosts);
   }, [posts]);
 
+  const trimText = (text: string, maxLength: number = 160): string => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + "...";
+    }
+    return text;
+  };
+
   return (
-    <aside className={style.asideContainer}>
-      <div className={style.postWrapper}>
-        {randomPosts.map((post) => (
-          <div key={post.id} className={style.post}>
-            <img
-              src={post.urlimage}
-              alt={`Imagem do post sobre ${post.title}`}
-              width={200}
-            />
-            <h3 onClick={() => navigate(`/post/${post.id}`)}>{post.title}</h3>
-          </div>
-        ))}
-      </div>
-    </aside>
+    <>
+      {randomPosts.map((post) => (
+        <StyledPostCard onClick={() => navigate(`/post/${post.id}`)}>
+          <StyledPostCardTitle>{post.title}</StyledPostCardTitle>
+          <StyledPostContent>{trimText(post.content)}</StyledPostContent>
+        </StyledPostCard>
+      ))}
+    </>
   );
 }
+
+const StyledPostCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0 16px 0;
+  padding: 16px;
+  width: 264px;
+  background-color: #d3edf5;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(47, 46, 46, 0.3);
+  position: relative;
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+  height: 160px;
+`;
+
+const StyledPostCardTitle = styled.a`
+  font-size: 1rem;
+  display: inline-block;
+  color: #03045e;
+  font-weight: bold;
+  text-decoration-line: underline;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 242px;
+  cursor: pointer;
+  margin-top: 0px;
+`;
+
+const StyledPostContent = styled.div`
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-align: left;
+  width: 230px;
+  margin-top: 0px;
+  cursor: pointer;
+`;

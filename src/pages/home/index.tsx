@@ -1,17 +1,17 @@
-import style from './styles/home.module.scss';
-import { Aside } from './aside';
-import { useEffect, useState } from 'react';
-import { IPost } from '@/interface/post.interface';
-import { http } from '@/utils/axios';
-import PostsContainer from '../home-2/posts-container/posts-container';
-import { IDataPagination } from '@/interface/pagination.interface';
+import style from "./styles/home.module.scss";
+import { Aside } from "./aside";
+import { useEffect, useState } from "react";
+import { IPost } from "@/interface/post.interface";
+import { http } from "@/utils/axios";
+import { IDataPagination } from "@/interface/pagination.interface";
+import { Feed } from "./feed";
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [currentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchPosts = async (signal: AbortSignal) => {
     try {
@@ -22,13 +22,13 @@ export function Home() {
       return response.data.posts;
     } catch (error) {
       if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
+        if (error.name === "AbortError") {
+          console.log("Request canceled");
         } else {
-          throw new Error('Error when searching for posts: ' + error.message);
+          throw new Error("Error when searching for posts: " + error.message);
         }
       } else {
-        throw new Error('Unexpected error');
+        throw new Error("Unexpected error");
       }
     }
   };
@@ -52,19 +52,21 @@ export function Home() {
   }, []);
 
   return (
-    <div className={style.homeContainer}>
+    <>
       {loading ? (
         <p>loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <>
+        <div className={style.homeContainer}>
           <div className={style.randomPosts}>
             <Aside posts={posts} />
           </div>
-          <PostsContainer posts={posts} />
-        </>
+          <div className={style.feed}>
+            <Feed posts={posts} />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 }
