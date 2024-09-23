@@ -21,7 +21,6 @@ export function AppRoutes() {
             <Route path="/admin/posts" element={<ListPosts />} />
             <Route path="/admin/create" element={<FormPost />} />
             <Route path="/admin/update/:id" element={<FormPost />} />
-            {/* Requisição de exclusão será apenas um botão para excluir */}
           </Route>
         </Route>
         <Route path="/register" element={<Register />} />
