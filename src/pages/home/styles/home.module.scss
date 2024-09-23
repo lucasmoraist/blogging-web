@@ -3,7 +3,7 @@
 
 .homeContainer {
   display: flex;
-  padding: 58px 0 90px 0;
+  padding: 16px 0 16px 0;
   justify-content: center;
 
   .feed {
@@ -16,15 +16,11 @@
     display: none;
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $desktop) {
     justify-content: space-around;
 
     .randomPosts {
       display: flex;
     }
-  }
-
-  @media (min-width: $desktop_md) {
-    padding: 58px 161px 90px 161px;
   }
 }

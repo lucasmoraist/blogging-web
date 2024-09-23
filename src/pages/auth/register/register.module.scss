@@ -1,11 +1,29 @@
 @import '@/styles/_variables';
 @import '@/styles/_breakpoints';
 
+.subjectsDropdrown {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    height: 50px;
+    background-color: #ffff;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    padding: 6px;
+    margin-top: 6px;
+}
+
+.subjectLabel {
+    font-family: "Roboto", sans-serif;
+    color: #219ebc;
+    margin-bottom: 8px;
+}
+
+
 .sectionWrapper {
     width: 100%;
     min-height: 100vh;
     height: 100%;
-
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -44,22 +62,19 @@
         }
     }
 
-    @media (min-width: $tablet_sml) {
+    @media (min-width: $tablet) {
         h2 {
             font-size: 48px;
         }
 
         form {
-            .container {
-                label {
-                    font-size: 24px;
-
-                    input {
-                        height: 40px;
-                        font-size: 20px;
+            .container {            
+                        input {
+                            height: 40px;
+                            font-size: 20px;
+                        }
                     }
-                }
-            }
+
 
             .buttons {
                 flex-direction: row;
@@ -68,7 +83,7 @@
         }
     }
 
-    @media (min-width: $desktop_sml) {
+    @media (min-width: $desktop) {
         h2 {
             font-size: 64px;
         }
@@ -76,7 +91,7 @@
         form {
             .container {
                 label {
-                    font-size: 32px;
+                    font-size: 16px;
 
                     input {
                         height: 50px;

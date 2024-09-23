@@ -70,7 +70,7 @@
         }
     }
 
-    @media (min-width: $tablet_sml) {
+    @media (min-width: $tablet) {
         .post {
             .postContent {
                 h2 {
@@ -90,7 +90,7 @@
         }
     }
 
-    @media (min-width: $desktop_lg) {
+    @media (min-width: $desktop) {
         .post {
             .postImage {
                 img {

@@ -1,5 +1,5 @@
-@import '@/styles/_variables';
 @import '@/styles/_breakpoints';
+@import '@/styles/_variables';
 
 .asideContainer {
     position: sticky;
@@ -31,7 +31,7 @@
             h3 {
                 font-family: $lato_font;
                 font-size: 18px;
-                color: $secondary_color;
+                color: $primary_color;
                 cursor: pointer;
                 padding: 5px;
 

@@ -4,14 +4,15 @@ import { IUser } from '@/interface/user.interface';
 import { useNavigate } from 'react-router-dom';
 import style from './register.module.scss';
 import { Button } from '@/components/button';
-import { Form, Formik, FormikValues } from 'formik';
+import { Field, Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { Input } from '@/components/input/input';
+import { schoolSubjects } from '@/pages/home-2/scripts/constants';
 
 export function FormRegister() {
   const { registerData } = usePost();
   const navigate = useNavigate();
-
+  
   const handleSubmit = (values: FormikValues) => {
     const user: IUser = {
       username: values.username,
@@ -23,7 +24,7 @@ export function FormRegister() {
         if (response) {
           const teacher: ITeacher = {
             name: values.name,
-            school_subject: values.school,
+            school_subject: values.school_subject,
             user_id: response.data.id,
           };
 
@@ -38,7 +39,7 @@ export function FormRegister() {
 
   const schema = Yup.object().shape({
     name: Yup.string().required('Campo obrigatório'),
-    school: Yup.string().required('Campo obrigatório'),
+    school_subject: Yup.string().required('Seleção obrigatória'),
     username: Yup.string().required('Campo obrigatório'),
     password: Yup.string().required('Campo obrigatório'),
     passwordConfirmed: Yup.string().oneOf(
@@ -51,7 +52,7 @@ export function FormRegister() {
     <Formik
       initialValues={{
         name: '',
-        school: '',
+        school_subject: '',
         username: '',
         password: '',
         passwordConfirmed: '',
@@ -66,9 +67,19 @@ export function FormRegister() {
               <label>
                 <Input title="Nome do professor" name="name" type="text" />
               </label>
-
               <label>
-                <Input title="Escola onde atua" name="school" type="text" />
+        
+                <label className={style.subjectLabel}>Matéria</label>
+        
+                <Field
+                  name="school_subject"
+                  as="select"
+                  className={style.subjectsDropdrown}
+                >
+                {schoolSubjects.map((subject, index) => ( 
+                    <option value={subject.value} key={index}>{subject.label}</option>
+                ))}
+                </Field>
               </label>
 
               <label>
@@ -96,7 +107,10 @@ export function FormRegister() {
               >
                 Voltar
               </Button>
-              <Button option="primary" type="submit">
+              <Button 
+                option="primary" 
+                type="submit"
+              >
                 Cadastrar
               </Button>
             </div>

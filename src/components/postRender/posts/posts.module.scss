@@ -43,11 +43,12 @@
       }
 
       .postNotification {
-        width: 30%;
+        width: 300%;
         height: auto;
         text-align: right;
         font-family: $lato_font;
         font-size: 16px;
+        background-color: red;
       }
 
       .postNew {
@@ -55,10 +56,12 @@
         background-color: $mustard_yellow;
         padding: 3px 4px;
         border-radius: 30px;
+        background-color: red;
       }
 
       .postOld {
         color: $secondary_color;
+        background-color: aqua;
       }
     }
 
@@ -72,7 +75,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $tablet) {
     flex-direction: row;
     width: 676px;
     height: 229px;
@@ -110,7 +113,7 @@
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $desktop) {
     .postInfo {
       h2 {
         cursor: pointer;
@@ -122,7 +125,7 @@
     }
   }
 
-  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
+  @media (min-width: $desktop) and (max-width: $desktop) {
     .postImage {
       width: 355px;
     }

@@ -1,16 +1,17 @@
-import axios from "axios";
-import { redirect } from "react-router-dom";
+import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 export function http() {
     const token = localStorage.getItem('token');
-    const prodUrl = process.env.REACT_APP_API_URL;
+    const profile = import.meta.env.VITE_PROFILE;
+    const apiUrl = profile === 'dev' ? 'http://localhost:3000' : import.meta.env.VITE_API_URL;
     if (!token) redirect('/login');
 
     return axios.create({
-        baseURL: prodUrl || 'http://localhost:3000',
+        baseURL: apiUrl,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
-    })
+    });
 }

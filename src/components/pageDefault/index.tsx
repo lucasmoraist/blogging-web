@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import { memo } from 'react';
 
-function PageDefault() {
+function PageDefault(): JSX.Element {
   return (
     <div
       style={{
