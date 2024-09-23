@@ -10,11 +10,11 @@ interface Props {
 const PostsContainer = ({ posts }: Props): JSX.Element => {
   return (
     <StyledPostsContainer>
-      {schoolSubjects.map((subject) => (
-        <>
+      {schoolSubjects.map((subject, index) => (
+        <div key={index}>
           <StyledSubjectName>{subject.label}</StyledSubjectName>
           <StyledSubjectSubtitle>{subject.description}</StyledSubjectSubtitle>
-        </>
+        </div>
       ))}
       <StyledPostsContainerUl>
         {posts.length > 0 &&
