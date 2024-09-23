@@ -7,7 +7,7 @@ import { authService } from "@/hooks/useAuth";
 import { memo, useEffect, useState } from "react";
 import { autorun } from "mobx";
 import { List, LogOut, SquarePen } from "lucide-react";
-import { SearchForm } from "@/pages/home/search";
+import { SearchForm } from "../search";
 
 function Header(): JSX.Element {
   const [isLogged, setIsLogged] = useState(authService.isLogged);
