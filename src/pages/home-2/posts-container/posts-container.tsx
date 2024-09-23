@@ -4,13 +4,7 @@ import { IPost } from '@/interface/post.interface';
 import { schoolSubjects } from '../scripts/constants';
 import { useEffect, useState } from 'react';
 import { http } from '@/utils/axios';
-
-interface DataPagination {
-  currentPage: number;
-  itemsPerPage: number;
-  posts: IPost[];
-  totalNumberOfPages: number;
-}
+import { IDataPagination } from '@/interface/pagination.interface';
 
 const PostsContainer = (): JSX.Element => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -21,7 +15,7 @@ const PostsContainer = (): JSX.Element => {
 
   const fetchPosts = async (signal: AbortSignal) => {
     try {
-      const response = await http().get<DataPagination>(
+      const response = await http().get<IDataPagination>(
         `/posts?page=${currentPage}&limit=${itemsPerPage}`,
         { signal }
       );
