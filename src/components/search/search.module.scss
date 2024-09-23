@@ -1,0 +1,78 @@
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .search {
+    width: 254px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    border-radius: 30px;
+
+    input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 30px;
+      padding: 0 10px;
+      font-size: 16px;
+      background: transparent;
+      cursor: text;
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    button {
+      background: transparent;
+      border: none;
+
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    max-height: 200px;
+    max-width: 254px;
+    border-radius: 30px;
+    overflow-y: auto;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+
+    @media (min-width: $tablet_sml) {
+      width: 676px;
+      justify-content: start;
+    }
+  }
+}
