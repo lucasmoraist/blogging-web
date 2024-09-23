@@ -1,7 +1,6 @@
 import { IPost } from '@/interface/post.interface';
 import style from './srp.module.scss';
 import { NotFound } from '@/pages/notFound';
-import { useNavigate } from 'react-router-dom';
 
 interface Props {
   posts: IPost[];
