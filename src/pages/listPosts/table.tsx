@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -17,66 +17,66 @@ import { useNavigate } from 'react-router-dom';
 interface PostAdmin {
   id: string;
   title: string;
-  content: string;
   createdat: string;
   name: string;
   school_subject: string;
 }
 
+interface DataPagination {
+  currentPage: number;
+  itemsPerPage: number;
+  posts: PostAdmin[];
+  totalNumberOfPages: number;
+}
+
 export function TableComponent() {
   const [posts, setPosts] = useState<PostAdmin[]>([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [totalPosts, setTotalPosts] = useState(0);
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
 
-  useEffect(() => {
-    fetchPosts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, rowsPerPage]);
+  const navigate = useNavigate();
 
   const fetchPosts = () => {
     http()
-      .get(`/admin/posts?page=${page + 1}&limit=${rowsPerPage}`)
+      .get<DataPagination>(
+        `/admin/posts?page=${currentPage + 1}&limit=${itemsPerPage}`
+      )
       .then((response) => {
-        // Assumindo que a resposta é um array de posts e contém a quantidade total de posts
-        if (Array.isArray(response.data)) {
-          setPosts(response.data);
-          // Se você tiver um endpoint separado para obter o total de posts, ajuste aqui
-          setTotalPosts(response.data.length); // Ajuste conforme a resposta da API
-        } else {
-          console.error('Resposta da API não é um array:', response.data);
-        }
+        console.log(response);
+        setPosts(response.data.posts);
+        setTotalPages(response.data.totalNumberOfPages);
       })
       .catch((error) => {
         console.error('Erro ao buscar posts:', error);
       });
   };
 
-  const deletePost = (postId: string) => {
-    http()
-      .delete(`/admin/posts/${postId}`)
-      .then(() => {
-        fetchPosts(); // Recarregar a lista de posts após exclusão
-      })
-      .catch((error) => {
-        console.error('Erro ao excluir post:', error);
-      });
-  };
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    event?.preventDefault();
-    setPage(newPage);
+  const handleChangePage = (event: unknown, newPage: number) => {
+    event;
+    setCurrentPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setItemsPerPage(parseInt(event.target.value, 10));
+    setCurrentPage(0);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [currentPage, itemsPerPage]);
+
+  const deletePost = (postId: string) => {
+    http()
+      .delete(`/admin/posts/${postId}`)
+      .then(() => {
+        fetchPosts();
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir post:', error);
+      });
   };
 
   const dateFormatter = (date: string) => {
@@ -107,8 +107,8 @@ export function TableComponent() {
         </TableHead>
         <TableBody>
           {posts.length > 0 ? (
-            posts.map((post) => (
-              <TableRow key={post.id}>
+            posts.map((post, index) => (
+              <TableRow key={index}>
                 <TableCell>{post.title}</TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>{post.name}</TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>
@@ -146,10 +146,10 @@ export function TableComponent() {
         </TableBody>
         <TablePagination
           component="div"
-          count={totalPosts}
-          page={page}
+          count={totalPages * itemsPerPage} // Total de posts
+          page={currentPage}
           onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
+          rowsPerPage={itemsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           labelRowsPerPage="Linhas por página:"
           rowsPerPageOptions={[5, 10, 25]}
