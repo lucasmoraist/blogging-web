@@ -1,18 +1,18 @@
-import { usePost } from '@/hooks/usePost';
-import { ITeacher } from '@/interface/teacher.interface';
-import { IUser } from '@/interface/user.interface';
-import { useNavigate } from 'react-router-dom';
-import style from './register.module.scss';
-import { Button } from '@/components/button';
-import { Field, Form, Formik, FormikValues } from 'formik';
-import * as Yup from 'yup';
-import { Input } from '@/components/input/input';
-import { schoolSubjects } from '@/pages/home-2/scripts/constants';
+import { usePost } from "@/hooks/usePost";
+import { ITeacher } from "@/interface/teacher.interface";
+import { IUser } from "@/interface/user.interface";
+import { useNavigate } from "react-router-dom";
+import style from "./register.module.scss";
+import { Button } from "@/components/button";
+import { Field, Form, Formik, FormikValues } from "formik";
+import * as Yup from "yup";
+import { Input } from "@/components/input/input";
+import { schoolSubjects } from './scripts/constants';
 
 export function FormRegister() {
   const { registerData } = usePost();
   const navigate = useNavigate();
-  
+
   const handleSubmit = (values: FormikValues) => {
     const user: IUser = {
       username: values.username,
@@ -20,7 +20,7 @@ export function FormRegister() {
     };
 
     try {
-      registerData<IUser>({ url: '/user', data: user }).then((response) => {
+      registerData<IUser>({ url: "/user", data: user }).then((response) => {
         if (response) {
           const teacher: ITeacher = {
             name: values.name,
@@ -28,8 +28,8 @@ export function FormRegister() {
             user_id: response.data.id,
           };
 
-          registerData<ITeacher>({ url: '/teacher', data: teacher });
-          navigate('/login');
+          registerData<ITeacher>({ url: "/teacher", data: teacher });
+          navigate("/login");
         }
       });
     } catch (error) {
@@ -38,24 +38,24 @@ export function FormRegister() {
   };
 
   const schema = Yup.object().shape({
-    name: Yup.string().required('Campo obrigatório'),
-    school_subject: Yup.string().required('Seleção obrigatória'),
-    username: Yup.string().required('Campo obrigatório'),
-    password: Yup.string().required('Campo obrigatório'),
+    name: Yup.string().required("Campo obrigatório"),
+    school_subject: Yup.string().required("Seleção obrigatória"),
+    username: Yup.string().required("Campo obrigatório"),
+    password: Yup.string().required("Campo obrigatório"),
     passwordConfirmed: Yup.string().oneOf(
-      [Yup.ref('password')],
-      'As senhas devem ser iguais'
+      [Yup.ref("password")],
+      "As senhas devem ser iguais"
     ),
   });
 
   return (
     <Formik
       initialValues={{
-        name: '',
-        school_subject: '',
-        username: '',
-        password: '',
-        passwordConfirmed: '',
+        name: "",
+        school_subject: "",
+        username: "",
+        password: "",
+        passwordConfirmed: "",
       }}
       validationSchema={schema}
       onSubmit={handleSubmit}
@@ -67,18 +67,18 @@ export function FormRegister() {
               <label>
                 <Input title="Nome do professor" name="name" type="text" />
               </label>
-              <label>
-        
-                <label className={style.subjectLabel}>Matéria</label>
-        
+              <label className={style.subjectLabel}>
+                <span>Matéria</span>
                 <Field
                   name="school_subject"
                   as="select"
                   className={style.subjectsDropdrown}
                 >
-                {schoolSubjects.map((subject, index) => ( 
-                    <option value={subject.value} key={index}>{subject.label}</option>
-                ))}
+                  {schoolSubjects.map((subject, index) => (
+                    <option value={subject.value} key={index}>
+                      {subject.label}
+                    </option>
+                  ))}
                 </Field>
               </label>
 
@@ -103,14 +103,11 @@ export function FormRegister() {
               <Button
                 option="secondary"
                 type="button"
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
               >
                 Voltar
               </Button>
-              <Button 
-                option="primary" 
-                type="submit"
-              >
+              <Button option="primary" type="submit">
                 Cadastrar
               </Button>
             </div>
