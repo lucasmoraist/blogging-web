@@ -51,12 +51,10 @@
             }
 
         }
-        button {
-            border: none;
-            background: transparent;
-        }
 
         .edit {
+            border: none;
+            background: transparent;
             svg {
                 cursor: pointer;
 
@@ -67,6 +65,8 @@
         }
 
         .delete {
+            border: none;
+            background: transparent;
             svg {
                 cursor: pointer;
 
