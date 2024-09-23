@@ -32,8 +32,8 @@ export function Aside({ posts }: Props): JSX.Element {
 
   return (
     <>
-      {randomPosts.map((post) => (
-        <StyledPostCard onClick={() => navigate(`/post/${post.id}`)}>
+      {randomPosts.map((post, index) => (
+        <StyledPostCard key={index} onClick={() => navigate(`/post/${post.id}`)}>
           <StyledPostCardTitle>{post.title}</StyledPostCardTitle>
           <StyledPostContent>{trimText(post.content)}</StyledPostContent>
         </StyledPostCard>
