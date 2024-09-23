@@ -1,85 +1,83 @@
-@import '@/styles/_variables';
-@import '@/styles/_breakpoints';
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
 
 .sectionWrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  padding: 35px 40px;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: $helvetica_font;
+    color: $primary_color;
+    line-height: auto;
+  }
+
+  .tableContainer {
     width: 100%;
+    max-width: 1280px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    // Representando todos os elementos que possuem a classe .tableCell
+    .tableCell {
+      font-family: $montserrat_font;
+    }
 
-    padding: 35px 40px;
+    .tableHead {
+      background-color: $secondary_color;
 
-    h2 {
-        font-size: 26px;
+      .tableCell {
+        color: $mustard_yellow;
         font-weight: 700;
-        font-family: $lato_font;
-        color: $primary_color;
-        line-height: auto;
+      }
     }
 
-    .tableContainer {
-        width: 100%;
-        max-width: 1280px;
+    .tableRowBody {
+      cursor: pointer;
 
-        // Representando todos os elementos que possuem a classe .tableCell
-        .tableCell {
-            font-family: $montserrat_font;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.1);
+      }
 
-        }
-
-        .tableHead {
-            background-color: $secondary_color;
-
-            .tableCell {
-                color: $mustard_yellow;
-                font-weight: 700;
-            }
-        }
-
-        .tableRowBody {
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba($color: #000000, $alpha: .1);
-            }
-
-            .link {
-                color: #000;
-                text-decoration: none;
-            }
-
-        }
-
-        .edit {
-            border: none;
-            background: transparent;
-            svg {
-                cursor: pointer;
-
-                &:hover {
-                    color: rgb(9, 9, 244);
-                }
-            }
-        }
-
-        .delete {
-            border: none;
-            background: transparent;
-            svg {
-                cursor: pointer;
-
-                &:hover {
-                    color: rgb(244, 9, 9);
-                }
-            }
-        }
+      .link {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+    button {
+      border: none;
+      background: transparent;
     }
 
-    @media (min-width: $desktop) {
-        h2 {
-            font-size: 36px;
+    .edit {
+      svg {
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(9, 9, 244);
         }
+      }
     }
+
+    .delete {
+      svg {
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(244, 9, 9);
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop_sml) {
+    h2 {
+      font-size: 36px;
+    }
+  }
 }
