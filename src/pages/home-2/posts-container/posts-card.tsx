@@ -19,7 +19,7 @@ const PostCard = ({ post } : Props): JSX.Element => {
   const trimmedContent = trimText(post.content);
   
   return (
-    <StyledPostCard post={post}>
+    <StyledPostCard>
         <StyledPostCardTitle onClick={() => navigate(`/post/${post.id}`)}>
             {post.title}
         </StyledPostCardTitle>
