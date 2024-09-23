@@ -31,16 +31,33 @@ export function Aside({ posts }: Props): JSX.Element {
   };
 
   return (
-    <>
-      {randomPosts.map((post, index) => (
-        <StyledPostCard key={index} onClick={() => navigate(`/post/${post.id}`)}>
-          <StyledPostCardTitle>{post.title}</StyledPostCardTitle>
-          <StyledPostContent>{trimText(post.content)}</StyledPostContent>
-        </StyledPostCard>
-      ))}
-    </>
+    <StyledAsideContainer>
+      <StyledPostWrapper>
+        {randomPosts.map((post, index) => (
+          <StyledPostCard
+            key={index}
+            onClick={() => navigate(`/post/${post.id}`)}
+          >
+            <StyledPostCardTitle>{post.title}</StyledPostCardTitle>
+            <StyledPostContent>{trimText(post.content)}</StyledPostContent>
+          </StyledPostCard>
+        ))}
+      </StyledPostWrapper>
+    </StyledAsideContainer>
   );
 }
+
+const StyledAsideContainer = styled.div`
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+`;
+
+const StyledPostWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
 
 const StyledPostCard = styled.div`
   display: flex;
