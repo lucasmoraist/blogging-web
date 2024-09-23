@@ -1,33 +1,37 @@
-@import '@/styles/_breakpoints';
-@import '@/styles/_variables';
+@import "@/styles/_breakpoints";
+@import "@/styles/_variables";
 
 .headerWrapper {
   background-color: $secondary_color;
+
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: auto;
+
+  width: 100%;
   height: 61px;
+
   padding: 0 20px;
 
   .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-     img {
-      width: 54px;
-      height: 54px;
+
+    gap: 20px;
+
+    img {
+      width: auto;
+      height: 19px;
     }
   }
 
   .menu {
     display: none;
-    position: absolute;
-    right: 16px;
 
     .links {
       display: flex;
       gap: 20px;
-      cursor: pointer;
 
       div {
         gap: 20px;
@@ -49,8 +53,8 @@
         background: none;
         border: none;
       }
-
     }
+
     .buttons {
       display: flex;
       gap: 15px;
@@ -61,7 +65,7 @@
     display: flex;
   }
 
-  @media (min-width: $tablet) and (max-width: $desktop) {
+  @media (min-width: $mobile_md) and (max-width: $tablet_sml) {
     height: 70px;
 
     .logo {
@@ -71,11 +75,12 @@
     }
   }
 
-  @media (min-width: $tablet) and (max-width: $desktop) {
+  @media (min-width: $tablet_sml) and (max-width: $desktop_md) {
     height: 100px;
+
     .logo {
       img {
-        height: 64px;
+        height: 40px;
       }
     }
 
@@ -87,7 +92,6 @@
       display: flex;
 
       .links {
-        cursor: pointer;
         div {
           display: flex;
         }
@@ -95,27 +99,29 @@
     }
   }
 
-  @media (min-width: $desktop) {
+  @media (min-width: $desktop_sml) {
     .linkNavigate {
       cursor: pointer;
     }
   }
 
-  @media (min-width: $desktop) {
+  @media (min-width: $desktop_lg) {
     height: 100px;
+
     .logo {
       img {
-        height: 54px;
+        height: 34px;
       }
     }
+
     .menuMobile {
       display: none;
     }
+
     .menu {
       display: flex;
 
       .links {
-        cursor: pointer;
         div {
           display: flex;
         }
