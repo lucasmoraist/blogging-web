@@ -1,7 +1,7 @@
 import { IPost } from '@/interface/post.interface';
-import { Posts } from './posts';
 import { Post } from './postDetails';
 import { memo } from 'react';
+import { Posts } from './posts';
 
 interface Props {
   id?: string;
