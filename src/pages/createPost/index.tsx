@@ -18,6 +18,7 @@ interface RegisterPost {
 
 export function FormPost() {
   const [posts, setPosts] = useState<IPost>();
+  const [isMounted, setIsMounted] = useState(true);
   
   const navigate = useNavigate();
   const { id } = useParams();
@@ -35,12 +36,12 @@ export function FormPost() {
     };
 
     if (id) {
-      let isMounted = true;
+      isMounted;
 
       fetchPost();
 
       return () => {
-        isMounted = false;
+        setIsMounted(false);
       };
     }
   }, [id]);
