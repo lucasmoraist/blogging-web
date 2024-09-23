@@ -37,18 +37,17 @@
 
       h2 {
         width: 70%;
-        font-family: $lato_font;
+        font-family: $helvetica_font;
         font-size: 18px;
         color: $secondary_color;
       }
 
       .postNotification {
-        width: 300%;
+        width: 30%;
         height: auto;
         text-align: right;
-        font-family: $lato_font;
+        font-family: $helvetica_font;
         font-size: 16px;
-        background-color: red;
       }
 
       .postNew {
@@ -56,12 +55,10 @@
         background-color: $mustard_yellow;
         padding: 3px 4px;
         border-radius: 30px;
-        background-color: red;
       }
 
       .postOld {
         color: $secondary_color;
-        background-color: aqua;
       }
     }
 
@@ -75,7 +72,7 @@
     }
   }
 
-  @media (min-width: $tablet) {
+  @media (min-width: $tablet_sml) {
     flex-direction: row;
     width: 676px;
     height: 229px;
@@ -113,7 +110,7 @@
     }
   }
 
-  @media (min-width: $desktop) {
+  @media (min-width: $desktop_sml) {
     .postInfo {
       h2 {
         cursor: pointer;
@@ -125,7 +122,7 @@
     }
   }
 
-  @media (min-width: $desktop) and (max-width: $desktop) {
+  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
     .postImage {
       width: 355px;
     }
