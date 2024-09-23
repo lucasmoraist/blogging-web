@@ -1,56 +1,13 @@
 import styled from 'styled-components';
 import PostCard from './posts-card';
-import { IPost } from '@/interface/post.interface';
 import { schoolSubjects } from '../scripts/constants';
-import { useEffect, useState } from 'react';
-import { http } from '@/utils/axios';
-import { IDataPagination } from '@/interface/pagination.interface';
+import { IPost } from '@/interface/post.interface';
 
-const PostsContainer = (): JSX.Element => {
-  const [posts, setPosts] = useState<IPost[]>([]);
-  const [currentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+interface Props {
+  posts: IPost[];
+}
 
-  const fetchPosts = async (signal: AbortSignal) => {
-    try {
-      const response = await http().get<IDataPagination>(
-        `/posts?page=${currentPage}&limit=${itemsPerPage}`,
-        { signal }
-      );
-      return response.data.posts;
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
-        } else {
-          throw new Error('Error when searching for posts: ' + error.message);
-        }
-      } else {
-        throw new Error('Unexpected error');
-      }
-    }
-  };
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchPosts(controller.signal)
-      .then((data) => {
-        if (data) setPosts(data);
-        setLoading(true);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      })
-      .finally(() => setLoading(false));
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
+const PostsContainer = ({ posts }: Props): JSX.Element => {
   return (
     <StyledPostsContainer>
       {schoolSubjects.map((subject) => (
@@ -60,16 +17,13 @@ const PostsContainer = (): JSX.Element => {
         </>
       ))}
       <StyledPostsContainerUl>
-        {loading ? <p>loading...</p> : posts.length > 0 &&
+        {posts.length > 0 &&
           posts.map((item, index) => (
             <li key={index}>
               <PostCard post={item} />
             </li>
           )) }
       </StyledPostsContainerUl>
-      <div>
-        {loading ? <p>loading...</p> : error ? <p>{error}</p> : null}
-      </div>
     </StyledPostsContainer>
   );
 };
