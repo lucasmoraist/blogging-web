@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      VITE_PROFILE: ${{ secrets.VITE_PROFILE }}
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build Docker Image
+        run: docker build --build-arg VITE_PROFILE=$VITE_PROFILE --build-arg VITE_API_URL=$VITE_API_URL -t $DOCKER_USERNAME/blogging:latest .
+
+      - name: Push Docker Image
+        run: docker push $DOCKER_USERNAME/blogging:latest
