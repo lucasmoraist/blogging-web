@@ -13,6 +13,7 @@ import { Pencil, Trash } from 'lucide-react';
 import { http } from '@/utils/axios';
 import style from './listPosts.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { ConfirmModal } from './confirmModal';
 
 interface PostAdmin {
   id: string;
@@ -34,8 +35,13 @@ export function TableComponent() {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchPosts();
+  }, [currentPage, itemsPerPage]);
 
   const fetchPosts = () => {
     http()
@@ -62,21 +68,6 @@ export function TableComponent() {
   ) => {
     setItemsPerPage(parseInt(event.target.value, 10));
     setCurrentPage(0);
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, [currentPage, itemsPerPage]);
-
-  const deletePost = (postId: string) => {
-    http()
-      .delete(`/admin/posts/${postId}`)
-      .then(() => {
-        fetchPosts();
-      })
-      .catch((error) => {
-        console.error('Erro ao excluir post:', error);
-      });
   };
 
   const dateFormatter = (date: string) => {
@@ -126,13 +117,20 @@ export function TableComponent() {
                   >
                     <Pencil />
                   </button>
-                  {/* Criar modal de confirmação antes de apagar o post */}
                   <button
-                    onClick={() => deletePost(post.id)}
+                    onClick={() => setToggleModal(true)}
                     className={style.delete}
                   >
                     <Trash />
                   </button>
+
+                  {toggleModal && (
+                    <ConfirmModal
+                      id={post.id}
+                      fetchPosts={fetchPosts}
+                      setToggleModal={setToggleModal}
+                    />
+                  )}
                 </TableCell>
               </TableRow>
             ))
