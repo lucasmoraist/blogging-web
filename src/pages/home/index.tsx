@@ -1,18 +1,19 @@
-import style from './styles/home.module.scss';
-import { Aside } from './aside';
-import { useEffect, useState } from 'react';
-import { IPost } from '@/interface/post.interface';
-import { http } from '@/utils/axios';
-import { IDataPagination } from '@/interface/pagination.interface';
-import { Feed } from './feed';
-import Loader  from '../../components/loader/loader';
+import style from "./styles/home.module.scss";
+import { Aside } from "./aside";
+import { useEffect, useState } from "react";
+import { IPost } from "@/interface/post.interface";
+import { http } from "@/utils/axios";
+import { IDataPagination } from "@/interface/pagination.interface";
+import { Feed } from "./feed";
+import Loader from "../../components/loader/loader";
+import { PagesList } from "@/components/pagesList";
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [totalNumberOfPages, setTotalNumberOfPages] = useState(0);
 
   const fetchPosts = async (signal: AbortSignal) => {
@@ -24,25 +25,24 @@ export function Home() {
       return response.data;
     } catch (error) {
       if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          console.log('Request canceled');
+        if (error.name === "AbortError") {
+          console.log("Request canceled");
         } else {
-          throw new Error('Error when searching for posts: ' + error.message);
+          throw new Error("Error when searching for posts: " + error.message);
         }
       } else {
-        throw new Error('Unexpected error');
+        throw new Error("Unexpected error");
       }
     }
   };
-
 
   useEffect(() => {
     const controller = new AbortController();
     fetchPosts(controller.signal)
       .then((data) => {
-        if (data)  {
-        setPosts(data.posts);
-        setTotalNumberOfPages(data?.totalNumberOfPages);
+        if (data) {
+          setPosts(data.posts);
+          setTotalNumberOfPages(data?.totalNumberOfPages);
         }
       })
       .catch((error) => {
@@ -53,17 +53,10 @@ export function Home() {
     return () => {
       controller.abort();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, itemsPerPage]);
 
   const handlePagination = (newPage: number) => {
     setCurrentPage(newPage);
-  };
-
-  const pageNumberLabel = (currentPage: number) => {
-    let pageLabel = '';
-    pageLabel = currentPage.toString();
-    return pageLabel;
   };
 
   return (
@@ -79,7 +72,11 @@ export function Home() {
           </div>
           <div className={style.feed}>
             <Feed posts={posts} />
-            <button onClick={() => handlePagination(currentPage + 1)}>{pageNumberLabel(currentPage)}</button>
+            <PagesList 
+              currentPage={currentPage} 
+              handlePagination={handlePagination} 
+              totalNumberOfPages={totalNumberOfPages}
+            />
           </div>
         </div>
       )}
