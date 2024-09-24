@@ -13,7 +13,6 @@ export function Feed({ posts }: Props) {
           <PostRender post={post} />
         </div>
       ))}
-      
     </>
   );
 }

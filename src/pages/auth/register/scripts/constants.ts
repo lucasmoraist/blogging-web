@@ -8,8 +8,3 @@ export const schoolSubjects = [
     { value: 'portugues', label: 'Língua Portuguesa', description: 'Nossa língua indo-europeia românica flexiva ocidental originada no galego-português'},
     { value: 'quimica', label: 'Química', description: 'Vamos aprender mais sobre a ciência que estuda a matéria, suas estruturas e propriedades!'},
   ];
-
-export const strings = {
-    TEACHER_MENU_TITLE: 'Veja os posts por professor!',
-    SRP_TITLE: 'A sua busca retornou QTD esses posts:' // TODO: add dynamic qty after implementation
-};

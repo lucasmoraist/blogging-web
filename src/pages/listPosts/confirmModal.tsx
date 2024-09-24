@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { http } from "@/utils/axios";
+import styled from 'styled-components';
+import { http } from '@/utils/axios';
 
 interface Props {
   id: string;
@@ -16,14 +16,14 @@ export function ConfirmModal({ fetchPosts, id, setToggleModal }: Props) {
         setToggleModal(false); // Fechar modal após excluir
       })
       .catch((error) => {
-        console.error("Erro ao excluir post:", error);
+        console.error('Erro ao excluir post:', error);
       });
   };
 
   return (
     <Overlay>
       <ModalContent>
-        <h3>Você deseja excluir essa postagem?</h3>
+        <h3>Você deseja mesmo excluir essa postagem?</h3>
         <ButtonContainer>
           <ConfirmButton onClick={() => deletePost(id)}>Sim</ConfirmButton>
           <CancelButton onClick={() => setToggleModal(false)}>Não</CancelButton>

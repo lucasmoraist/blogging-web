@@ -1,7 +1,7 @@
-import { IPost } from "@/interface/post.interface";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { IPost } from '@/interface/post.interface';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 interface Props {
   posts: IPost[];
@@ -25,13 +25,16 @@ export function Aside({ posts }: Props): JSX.Element {
 
   const trimText = (text: string, maxLength: number = 160): string => {
     if (text.length > maxLength) {
-      return text.slice(0, maxLength) + "...";
+      return text.slice(0, maxLength) + '...';
     }
     return text;
   };
 
   return (
-    <StyledAsideContainer>
+    <StyledLatestPostsContainer>
+      <StyledLatestPostsTitle>
+        Nossos últimos posts!
+      </StyledLatestPostsTitle>
       <StyledPostWrapper>
         {randomPosts.map((post, index) => (
           <StyledPostCard
@@ -43,20 +46,23 @@ export function Aside({ posts }: Props): JSX.Element {
           </StyledPostCard>
         ))}
       </StyledPostWrapper>
-    </StyledAsideContainer>
+    </StyledLatestPostsContainer>
   );
 }
 
-const StyledAsideContainer = styled.div`
+const StyledLatestPostsContainer = styled.div`
   position: sticky;
-  top: 20px;
+  top: 16px;
   align-self: flex-start;
+  background-color: #023047;
+  padding: 12px;
+  border-radius: 12px;
 `;
 
 const StyledPostWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 16px;
 `;
 
 const StyledPostCard = styled.div`
@@ -76,7 +82,7 @@ const StyledPostCard = styled.div`
 `;
 
 const StyledPostCardTitle = styled.a`
-  font-size: 1rem;
+  font-size: 0.875rem;
   display: inline-block;
   color: #03045e;
   font-weight: bold;
@@ -84,10 +90,11 @@ const StyledPostCardTitle = styled.a`
   text-align: left;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
-  width: 242px;
+  overflow: clip;
+  width: 240px;
   cursor: pointer;
-  margin-top: 0px;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
 `;
 
 const StyledPostContent = styled.div`
@@ -97,4 +104,16 @@ const StyledPostContent = styled.div`
   width: 230px;
   margin-top: 0px;
   cursor: pointer;
+  padding: 2px;
+  font-family: Helvetica, sans-serif;
 `;
+ 
+ const StyledLatestPostsTitle = styled.p`
+  font-weight: 600;
+  color: #e36414;
+  display: flex;
+  text-align: center;
+  align-self: self-end;
+  font-family: Helvetica, sans-serif;
+  margin-left: 36px;
+ `;
