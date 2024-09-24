@@ -42,7 +42,7 @@ export function Posts({ post }: Props): JSX.Element {
           <h2>{post.title}</h2>
           <div className={style.postNotification}>
             {postDate(post.createdat) === 'New' ? (
-              <span className={style.postNew}>Novo post!</span>
+              <span className={style.postNew}>Novo!</span>
             ) : (
               <span className={style.postOld}>{postDate(post.createdat)}</span>
             )}
