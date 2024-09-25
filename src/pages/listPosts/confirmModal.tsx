@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { deletePost } from "./service/deletePost";
+import apiService from '@/utils/apiService';
+import styled from 'styled-components';
 
 interface Props {
   id: string;
@@ -8,8 +8,12 @@ interface Props {
 }
 
 export function ConfirmModal({ fetchPosts, id, setToggleModal }: Props) {
-  const remove = (postId: string) =>
-    deletePost({ postId, fetchPosts, setToggleModal });
+  const remove = (postId: string) => {
+    apiService.deletePost(postId).then(() => {
+      fetchPosts;
+      setToggleModal(false);
+    });
+  };
 
   return (
     <Overlay>

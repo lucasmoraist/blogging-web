@@ -6,7 +6,7 @@ import { Exceptions } from "../exception";
 import { IPost } from "@/interface/post.interface";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader/loader";
-import { getPost } from "./service/getPost";
+import apiService from "@/utils/apiService";
 
 export function PostDetails() {
   const navigate = useNavigate();
@@ -17,7 +17,12 @@ export function PostDetails() {
   const { postId } = useParams();
 
   useEffect(() => {
-    getPost({ postId, setPosts, setLoading });
+    apiService.getPost(postId).then((response) => {
+      if (response) {
+        setPosts(response.data);
+        setLoading(false);
+      }
+    });
   }, [postId]);
 
   if (loading) return <Loader />;

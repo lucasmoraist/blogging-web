@@ -14,8 +14,8 @@ import style from './listPosts.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { ConfirmModal } from './confirmModal';
 import { IPostAdmin } from '@/interface/post-admin.interface';
-import { listAdmin } from './service/listAdmin';
 import Loader from '@/components/loader/loader';
+import apiService from '@/utils/apiService';
 
 export function ListPosts() {
   const [posts, setPosts] = useState<IPostAdmin[]>([]);
@@ -26,17 +26,20 @@ export function ListPosts() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const fetchPosts = listAdmin({
-    currentPage,
-    itemsPerPage,
-    setPosts,
-    setTotalPages,
-    setLoading,
-  });
 
   useEffect(() => {
     fetchPosts;
   }, [currentPage, itemsPerPage]);
+
+  const fetchPosts = apiService
+    .listAdmin(currentPage, itemsPerPage)
+    .then((response) => {
+      if (response) {
+        setPosts(response.data.posts);
+        setTotalPages(response.data.totalNumberOfPages);
+        setLoading(false);
+      }
+    });
 
   const handleChangePage = (event: unknown, newPage: number) => {
     event;

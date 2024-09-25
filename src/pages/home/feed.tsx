@@ -6,6 +6,9 @@ interface Props {
 }
 
 export function Feed({ posts }: Props) {
+  
+  console.log(posts?.sort((a, b) => new Date(b.createdat).getTime() - new Date(a.createdat).getTime()));
+  
   return (
     <>
       {posts?.map((post) => (

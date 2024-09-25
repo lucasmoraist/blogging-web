@@ -1,34 +1,33 @@
-import { usePost } from "@/hooks/usePost";
-import { ITeacher } from "@/interface/teacher.interface";
-import { IUser } from "@/interface/user.interface";
-import { useNavigate } from "react-router-dom";
-import style from "./register.module.scss";
-import { Button } from "@/components/button";
-import { Field, Form, Formik, FormikValues } from "formik";
-import * as Yup from "yup";
-import { Input } from "@/components/input/input";
-import { schoolSubjects } from "./scripts/constants";
+import { ITeacher } from '@/interface/teacher.interface';
+import { IUser } from '@/interface/user.interface';
+import { useNavigate } from 'react-router-dom';
+import style from './register.module.scss';
+import { Button } from '@/components/button';
+import { Field, Form, Formik, FormikValues } from 'formik';
+import * as Yup from 'yup';
+import { Input } from '@/components/input/input';
+import { schoolSubjects } from './scripts/constants';
+import apiService from '@/utils/apiService';
 
 export function Register() {
-  const { registerData } = usePost();
   const navigate = useNavigate();
 
   const initialValues = {
-    name: "",
-    school_subject: "",
-    username: "",
-    password: "",
-    passwordConfirmed: "",
-  }
+    name: '',
+    school_subject: '',
+    username: '',
+    password: '',
+    passwordConfirmed: '',
+  };
 
   const schema = Yup.object().shape({
-    name: Yup.string().required("Campo obrigatório"),
-    school_subject: Yup.string().required("Seleção obrigatória"),
-    username: Yup.string().required("Campo obrigatório"),
-    password: Yup.string().required("Campo obrigatório"),
+    name: Yup.string().required('Campo obrigatório'),
+    school_subject: Yup.string().required('Seleção obrigatória'),
+    username: Yup.string().required('Campo obrigatório'),
+    password: Yup.string().required('Campo obrigatório'),
     passwordConfirmed: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "As senhas devem ser iguais"
+      [Yup.ref('password')],
+      'As senhas devem ser iguais'
     ),
   });
 
@@ -39,7 +38,7 @@ export function Register() {
     };
 
     try {
-      registerData<IUser>({ url: "/user", data: user }).then((response) => {
+      apiService.registerUser(user).then((response) => {
         if (response) {
           const teacher: ITeacher = {
             name: values.name,
@@ -47,8 +46,8 @@ export function Register() {
             user_id: response.data.id,
           };
 
-          registerData<ITeacher>({ url: "/teacher", data: teacher });
-          navigate("/login");
+          apiService.registerTeacher(teacher);
+          navigate('/login');
         }
       });
     } catch (error) {
@@ -112,7 +111,7 @@ export function Register() {
                 <Button
                   option="secondary"
                   type="button"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate('/')}
                 >
                   Voltar
                 </Button>
