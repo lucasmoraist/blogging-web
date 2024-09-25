@@ -1,14 +1,17 @@
 import { usePost } from "@/hooks/usePost";
-import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
-import { useNavigate, useParams } from "react-router-dom";
+import { Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
 import style from "./createPost.module.scss";
 import { useEffect, useState } from "react";
-import { http } from "@/utils/axios";
 import { IPost } from "@/interface/post.interface";
-import { Input } from "@/components/input/input";
-import { Button } from "@/components/button";
 import { Exceptions } from "../exception";
+import Loader from "@/components/loader/loader";
+import { getPost } from "./service/getPost";
+import { createPost } from "./service/createPost";
+import { updatePost } from "./service/updatePost";
+import UpdateForm from "./updateForm";
+import { CreateForm } from "./createForm";
+import { useParams } from "react-router-dom";
 
 interface RegisterPost {
   title: string;
@@ -19,40 +22,25 @@ interface RegisterPost {
 
 export function FormPost() {
   const [posts, setPosts] = useState<IPost>();
-  const [isMounted, setIsMounted] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
   const { id } = useParams();
 
-  const { registerData, error } = usePost();
+  const { error } = usePost();
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await http().get(`/posts/${id}`);
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar o post:", error);
-      }
-    };
-
     if (id) {
-      isMounted;
-
-      fetchPost();
-
-      return () => {
-        setIsMounted(false);
-      };
+      getPost({ id, setPosts, setLoading });
     }
   }, [id]);
 
-  if (id && !posts) return <Exceptions />;
+  if (id && loading) return <Loader />;
+  if (id && !posts) return <Exceptions statusCode={404} />;
 
   const initialValues = {
-    title: posts?.title,
-    content: posts?.content,
-    urlImage: posts?.urlimage,
+    title: id ? posts?.title : "",
+    content: id ? posts?.content : "",
+    urlImage: id ? posts?.urlimage : "",
   };
 
   const schema = Yup.object().shape({
@@ -74,28 +62,9 @@ export function FormPost() {
     };
 
     if (id) {
-      registerData<RegisterPost>({
-        url: `/admin/posts/${id}`,
-        data: post,
-      }).then((response) => {
-        console.log(response);
-        if (response?.status === 200) {
-          navigate("/admin/posts");
-        } else {
-          console.log(error);
-        }
-      });
+      updatePost({ id, post });
     } else {
-      registerData<RegisterPost>({ url: "/admin/posts", data: post }).then(
-        (response) => {
-          console.log(response);
-          if (response?.status === 201) {
-            navigate("/admin/posts");
-          } else {
-            console.log(error);
-          }
-        }
-      );
+      createPost({ post });
     }
   };
 
@@ -110,72 +79,7 @@ export function FormPost() {
         {(formik) => {
           return (
             <Form onSubmit={formik.handleSubmit}>
-              <fieldset className={style.container}>
-                <label>
-                  {id ? (
-                    <Input
-                      title="Título"
-                      name="title"
-                      type="text"
-                      placeholder={posts?.title}
-                    />
-                  ) : (
-                    <Input title="Título" name="title" type="text" />
-                  )}
-                </label>
-                <label></label>
-                <label>
-                  {id ? (
-                    <Input
-                      title="URL da imagem"
-                      name="urlImage"
-                      type="text"
-                      placeholder={posts?.urlimage}
-                    />
-                  ) : (
-                    <Input title="URL da imagem" name="urlImage" type="text" />
-                  )}
-                </label>
-                <label className={style.textarea}>
-                  <span>Conteúdo</span>
-                  {id ? (
-                    <Field
-                      className={style.inputTextarea}
-                      name="content"
-                      as="textarea"
-                      placeholder={posts?.content}
-                    />
-                  ) : (
-                    <Field
-                      className={style.inputTextarea}
-                      name="content"
-                      as="textarea"
-                    />
-                  )}
-                  <ErrorMessage name="content">
-                    {(msg) => (
-                      <div style={{ marginTop: "4px", width: "260px" }}>
-                        <span style={{ color: "red" }}>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
-                </label>
-
-                <div className={style.buttons}>
-                  <Button
-                    option="secondary"
-                    type="button"
-                    onClick={
-                      id ? () => navigate("/admin/posts") : () => navigate("/")
-                    }
-                  >
-                    Voltar
-                  </Button>
-                  <Button option="primary" type="submit">
-                    {id ? "Editar" : "Criar"}
-                  </Button>
-                </div>
-              </fieldset>
+              {id ? <UpdateForm posts={posts} /> : <CreateForm />}
             </Form>
           );
         }}

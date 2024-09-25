@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { ConfirmModal } from "./confirmModal";
 import { IPostAdmin } from "@/interface/post-admin.interface";
 import { listAdmin } from "./service/listAdmin";
+import Loader from "@/components/loader/loader";
 
 export function ListPosts() {
   const [posts, setPosts] = useState<IPostAdmin[]>([]);
@@ -22,6 +23,7 @@ export function ListPosts() {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [toggleModal, setToggleModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const fetchPosts = listAdmin({
@@ -29,6 +31,7 @@ export function ListPosts() {
     itemsPerPage,
     setPosts,
     setTotalPages,
+    setLoading,
   });
 
   useEffect(() => {
@@ -50,6 +53,8 @@ export function ListPosts() {
   const dateFormatter = (date: string) => {
     return new Date(date).toLocaleDateString("pt-BR");
   };
+
+  if (loading) return <Loader />;
 
   return (
     <section className={style.sectionWrapper}>
@@ -138,7 +143,7 @@ export function ListPosts() {
           </TableBody>
           <TablePagination
             component="div"
-            count={totalPages * itemsPerPage} // Total de posts
+            count={totalPages * itemsPerPage}
             page={currentPage}
             onPageChange={handleChangePage}
             rowsPerPage={itemsPerPage}

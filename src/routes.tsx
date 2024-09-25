@@ -19,8 +19,11 @@ export function AppRoutes() {
 
           <Route element={<PrivateRoute />}>
             <Route path="/admin/posts" element={<ListPosts />} />
-            <Route path="/admin/create" element={<FormPost />} />
-            <Route path="/admin/update/:id" element={<FormPost />} />
+            <Route path="/admin/create" element={<FormPost key={"create"} />} />
+            <Route
+              path="/admin/update/:id"
+              element={<FormPost key={"update"} />}
+            />
           </Route>
         </Route>
         <Route path="/register" element={<Register />} />

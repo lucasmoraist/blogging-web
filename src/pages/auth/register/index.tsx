@@ -77,7 +77,7 @@ export function Register() {
                   <Field
                     name="school_subject"
                     as="select"
-                    className={style.subjectsDropdrown}
+                    className={style.subjectsDropdown}
                   >
                     {schoolSubjects.map((subject, index) => (
                       <option value={subject.value} key={index}>
