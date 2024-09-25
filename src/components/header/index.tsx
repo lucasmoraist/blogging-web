@@ -33,6 +33,7 @@ function Header(): JSX.Element {
         </Link>
         <SearchForm />
       </div>
+      
       <div className={style.menuMobile}>
         <MenuHamburguer isLogged={isLogged} />
       </div>
