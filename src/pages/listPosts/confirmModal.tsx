@@ -1,31 +1,22 @@
-import styled from 'styled-components';
-import { http } from '@/utils/axios';
+import styled from "styled-components";
+import { deletePost } from "./service/deletePost";
 
 interface Props {
   id: string;
   setToggleModal: (value: boolean) => void;
-  fetchPosts: () => void;
+  fetchPosts: Promise<void>;
 }
 
 export function ConfirmModal({ fetchPosts, id, setToggleModal }: Props) {
-  const deletePost = (postId: string) => {
-    http()
-      .delete(`/admin/posts/${postId}`)
-      .then(() => {
-        fetchPosts();
-        setToggleModal(false); // Fechar modal após excluir
-      })
-      .catch((error) => {
-        console.error('Erro ao excluir post:', error);
-      });
-  };
+  const remove = (postId: string) =>
+    deletePost({ postId, fetchPosts, setToggleModal });
 
   return (
     <Overlay>
       <ModalContent>
         <h3>Você deseja mesmo excluir essa postagem?</h3>
         <ButtonContainer>
-          <ConfirmButton onClick={() => deletePost(id)}>Sim</ConfirmButton>
+          <ConfirmButton onClick={() => remove(id)}>Sim</ConfirmButton>
           <CancelButton onClick={() => setToggleModal(false)}>Não</CancelButton>
         </ButtonContainer>
       </ModalContent>
@@ -39,12 +30,12 @@ const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, .4);
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(1px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; 
+  z-index: 1000;
 `;
 
 const ModalContent = styled.div`

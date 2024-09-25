@@ -1,31 +1,31 @@
-@import '@/styles/_variables';
-@import '@/styles/_breakpoints';
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
 
 .pagesList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+
+  button {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    list-style: none;
+    justify-content: center;
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-family: $roboto_font;
+    color: $dark_color;
+    cursor: pointer;
 
-      background: transparent;
-      border: none;
-      font-size: 16px;
-      font-family: $roboto_font;
-      color: $dark_color;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    svg {
       cursor: pointer;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      svg {
-        cursor: pointer;
-      }
     }
   }
+}

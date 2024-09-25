@@ -2,14 +2,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import style from "./pagesList.module.scss";
 
 interface Props {
-    currentPage: number;
-    handlePagination: (page: number) => void;
-    totalNumberOfPages: number;
+  currentPage: number;
+  handlePagination: (page: number) => void;
+  totalNumberOfPages: number;
 }
 
-export function PagesList({ currentPage, handlePagination, totalNumberOfPages }: Props) {
-  
-    const pageNumberLabel = (currentPage: number) => {
+export function PagesList({
+  currentPage,
+  handlePagination,
+  totalNumberOfPages,
+}: Props) {
+  const pageNumberLabel = (currentPage: number) => {
     let pageLabel = "";
     pageLabel = currentPage.toString();
     return pageLabel;

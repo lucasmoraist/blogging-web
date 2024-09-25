@@ -6,14 +6,13 @@
 }
 
 .loader {
-  border: 12px solid #f3f3f3; 
+  border: 12px solid #f3f3f3;
   border-top: 12px solid #e36414;
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: spin 1s linear infinite; 
+  animation: spin 1s linear infinite;
 }
-
 
 @keyframes spin {
   0% {

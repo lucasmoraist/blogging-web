@@ -1,7 +1,5 @@
-import { createRoot } from 'react-dom/client';
-import { AppRoutes } from './routes.tsx';
-import './index.css';
+import { createRoot } from "react-dom/client";
+import { AppRoutes } from "./routes.tsx";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-    <AppRoutes />
-);
+createRoot(document.getElementById("root")!).render(<AppRoutes />);

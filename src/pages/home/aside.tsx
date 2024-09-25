@@ -4,24 +4,23 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
-  posts: IPost[];
+  posts?: IPost[];
 }
 
-// Idéia:
-// De início os posts que irão aparecer na lateral podem ser apenas posts aleatórios
-// Mas pode-se mudar o objetivo e mostrar apenas os posts melhores avaliados
 export function Aside({ posts }: Props): JSX.Element {
   const [randomPosts, setRandomPosts] = useState<IPost[]>([]);
   const navigate = useNavigate();
 
-  const getRandomPosts = (postList: IPost[], count: number): IPost[] => {
-    return postList.sort(() => Math.random() - 0.5).slice(0, count);
-  };
-
   useEffect(() => {
-    const selectedPosts = getRandomPosts(posts, 4);
-    setRandomPosts(selectedPosts);
+    if (posts) {
+      const selectedPosts = getRandomPosts(posts, 4);
+      setRandomPosts(selectedPosts);
+    }
   }, [posts]);
+
+  const getRandomPosts = (postList: IPost[], count: number): IPost[] => {
+    return postList?.sort(() => Math.random() - 0.5).slice(0, count);
+  };
 
   const trimText = (text: string, maxLength: number = 160): string => {
     if (text.length > maxLength) {

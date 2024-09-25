@@ -1,4 +1,4 @@
-import style from './loader.module.scss';  // Import the CSS file for styling
+import style from "./loader.module.scss"; // Import the CSS file for styling
 
 const Loader = (): JSX.Element => {
   return (

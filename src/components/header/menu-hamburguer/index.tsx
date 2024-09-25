@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import style from './menu.module.scss';
-import { List, LogOut, Menu, SquarePen, X } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '../../button';
-import { authService } from '@/hooks/useAuth';
+import { useState } from "react";
+import style from "./menu.module.scss";
+import { List, LogOut, Menu, SquarePen, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../../button";
+import { authService } from "@/hooks/useAuth";
 
 interface Props {
   isLogged: boolean;
@@ -19,7 +19,7 @@ export function MenuHamburguer({ isLogged }: Props): JSX.Element {
 
   const handleLogout = () => {
     authService.logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -45,26 +45,30 @@ export function MenuHamburguer({ isLogged }: Props): JSX.Element {
         <ul className={`${!isLogged && style.disconnected}`}>
           {isLogged ? (
             <div className={style.links}>
-            <div>
-              <Link className={style.linkNavigate} to={'/admin/create'}>
-                <SquarePen /> Escrever Post
-              </Link>
-              <Link className={style.linkNavigate} to={'/admin/posts'}>
-                <List /> Posts
-              </Link>
+              <div>
+                <Link className={style.linkNavigate} to={"/admin/create"}>
+                  <SquarePen /> Escrever Post
+                </Link>
+                <Link className={style.linkNavigate} to={"/admin/posts"}>
+                  <List /> Posts
+                </Link>
+              </div>
+              {isLogged ? (
+                <button className={style.linkNavigate} onClick={handleLogout}>
+                  <LogOut /> Sair
+                </button>
+              ) : (
+                ""
+              )}
             </div>
-            {isLogged ? (
-              <button className={style.linkNavigate} onClick={handleLogout}>
-                <LogOut /> Sair
-              </button>
-            ) : (
-              ''
-            )}
-          </div>
           ) : (
             <>
-              <Button option="secondary" onClick={() => navigate('/register')}>Cadastre-se</Button>
-              <Button option="primary" onClick={() => navigate('/login')}>Entrar</Button>
+              <Button option="secondary" onClick={() => navigate("/register")}>
+                Cadastre-se
+              </Button>
+              <Button option="primary" onClick={() => navigate("/login")}>
+                Entrar
+              </Button>
             </>
           )}
         </ul>

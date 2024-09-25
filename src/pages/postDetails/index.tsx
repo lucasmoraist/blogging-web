@@ -1,12 +1,12 @@
-import { PostRender } from '@/components/postRender';
-import { useNavigate, useParams } from 'react-router-dom';
-import style from './post-details.module.scss';
-import { ArrowLeft } from 'lucide-react';
-import { NotFound } from '../notFound';
-import { IPost } from '@/interface/post.interface';
-import { useEffect, useState } from 'react';
-import { http } from '@/utils/axios';
-import Loader from '@/components/loader/loader';
+import { PostRender } from "@/components/postRender";
+import { useNavigate, useParams } from "react-router-dom";
+import style from "./post-details.module.scss";
+import { ArrowLeft } from "lucide-react";
+import { Exceptions } from "../exception";
+import { IPost } from "@/interface/post.interface";
+import { useEffect, useState } from "react";
+import Loader from "@/components/loader/loader";
+import { getPost } from "./service/getPost";
 
 export function PostDetails() {
   const navigate = useNavigate();
@@ -17,23 +17,15 @@ export function PostDetails() {
   const { postId } = useParams();
 
   useEffect(() => {
-    http()
-      .get(`/posts/${postId}`)
-      .then((response) => {
-        setPosts(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-   
+    getPost({ postId, setPosts, setLoading });
   }, [postId]);
-   if (loading) return <Loader />;
-  if (!posts) return <NotFound />;
- 
+
+  if (loading) return <Loader />;
+  if (!posts) return <Exceptions statusCode={404} />;
+
   return (
     <main className={style.mainContainer}>
-      <button onClick={() => navigate('/')}>
+      <button onClick={() => navigate("/")}>
         <ArrowLeft />
         Voltar
       </button>

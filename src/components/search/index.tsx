@@ -66,11 +66,13 @@ export function SearchForm(): JSX.Element {
           </ul>
         </div>
       ) : (
-        noResults && <div className={style.results}>
+        noResults && (
+          <div className={style.results}>
             <ul>
-                <li>Sem resultados</li>
+              <li>Sem resultados</li>
             </ul>
-        </div>
+          </div>
+        )
       )}
     </form>
   );

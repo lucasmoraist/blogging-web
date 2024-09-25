@@ -1,5 +1,5 @@
-@import '@/styles/_variables';
-@import '@/styles/_breakpoints';
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
 
 .postContainer {
   display: flex;
@@ -16,7 +16,6 @@
 
   .postImage {
     height: 171px;
-
 
     img {
       width: 100%;
@@ -63,7 +62,6 @@
         color: $secondary_color;
       }
     }
-
 
     .postDescription {
       display: none;
@@ -112,7 +110,7 @@
 
       .postDescription {
         display: flex;
-        cursor:pointer;
+        cursor: pointer;
       }
     }
   }
@@ -135,8 +133,7 @@
     }
   }
 
-  @media (min-width: $desktop_md) and (max-width: $desktop_lg){
+  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
     width: 800px;
   }
-
 }
