@@ -100,4 +100,23 @@
       }
     }
   }
+
+  @media (min-width: $breakpoint-desktop-md) {
+    h2 {
+      font-size: 70px;
+    }
+
+    form {
+      .subjectLabel {
+        span {
+          font-size: 32px;
+        }
+
+        .subjectsDropdown {
+          height: 10px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
 }

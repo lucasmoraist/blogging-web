@@ -31,8 +31,8 @@ export function Aside({ posts }: Props): JSX.Element {
 
   return (
     <StyledLatestPostsContainer>
+      <StyledLatestPostsTitle>Nossos últimos posts!</StyledLatestPostsTitle>
       <StyledPostWrapper>
-        <StyledLatestPostsTitle>Nossos últimos posts!</StyledLatestPostsTitle>
         {randomPosts.map((post, index) => (
           <StyledPostCard
             key={index}
@@ -49,9 +49,10 @@ export function Aside({ posts }: Props): JSX.Element {
 
 const StyledLatestPostsContainer = styled.div`
   position: sticky;
-  top: 16px;
-  align-self: flex-start;
+  top: 120px;
+  align-self: center;
   background-color: #023047;
+  height: 60%;
   padding: 12px;
   border-radius: 12px;
 `;
@@ -60,7 +61,7 @@ const StyledPostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 16px;
 `;
 
@@ -104,7 +105,10 @@ const StyledPostContent = styled.div`
 `;
 
 const StyledLatestPostsTitle = styled.p`
+  font-size: 1.25rem;
   font-weight: 600;
   color: #e36414;
   font-family: Helvetica, sans-serif;
+  text-align: center;
+  margin: 20px 0;
 `;

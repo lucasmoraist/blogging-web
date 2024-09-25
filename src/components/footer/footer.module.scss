@@ -1,5 +1,5 @@
-@import "@/styles/_variables";
-@import "@/styles/_variables";
+@import "@/styles/__breakpoints";
+@import "@/styles/__variables";
 
 .footer {
   display: flex;
@@ -13,5 +13,19 @@
     color: $color-mustard-yellow;
     font-family: $font-roboto;
     font-size: 14px;
+  }
+
+  @media (min-width: $breakpoint-desktop-md) {
+    padding: 40px 0;
+    p {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: $breakpoint-desktop-lg) {
+    padding: 50px 0;
+    p {
+      font-size: 24px;
+    }
   }
 }

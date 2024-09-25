@@ -94,4 +94,22 @@
       justify-content: start;
     }
   }
+
+  @media (min-width: $breakpoint-desktop-lg) {
+    .search {
+      width: 400px;
+
+      input {
+        height: 60px;
+        font-size: 22px;
+      }
+    }
+
+    .results {
+      max-width: 400px;
+      width: 676px;
+      justify-content: start;
+    }
+
+  }
 }

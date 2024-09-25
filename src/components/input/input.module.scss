@@ -1,5 +1,5 @@
 @import "@/styles/_variables";
-@import "@/styles/_breakpoints";
+@import "@/styles/__breakpoints";
 
 .inputComponent {
   span {
@@ -20,5 +20,16 @@
     font-family: $font-roboto;
     font-size: 14px;
     color: $color-secondary;
+  }
+
+}
+@media (min-width: $breakpoint-desktop-md) {
+  .inputComponent {
+    span {
+      font-size: 32px;
+    }
+    input {
+      font-size: 80px;
+    }
   }
 }

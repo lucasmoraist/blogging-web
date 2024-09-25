@@ -128,12 +128,27 @@
   }
 
   @media (min-width: $breakpoint-desktop-md) and (max-width: $breakpoint-desktop-lg) {
+    width: 800px;
     .postImage {
       width: 355px;
     }
   }
 
-  @media (min-width: $breakpoint-desktop-md) and (max-width: $breakpoint-desktop-lg) {
-    width: 800px;
+  @media (min-width: $breakpoint-desktop-lg) {
+    .postImage {
+      width: 400px;
+    }
+
+    .postInfoWrapper {
+      .postInfo {
+        h2 {
+          font-size: 32px;
+        }
+      }
+
+      .postDescription {
+        font-size: 20px;
+      }
+    }
   }
 }
