@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import style from "./pagesList.module.scss";
+import styled from "styled-components";
 
 interface Props {
   currentPage: number;
@@ -19,84 +19,120 @@ export function PagesList({
   };
 
   return (
-    <ul className={style.pagesList}>
-      <li>
-        <button
+    <List>
+      <ListItem>
+        <Button
           onClick={() => handlePagination(currentPage - 1)}
           disabled={currentPage === 1}
         >
           <ChevronLeft />
-        </button>
-      </li>
+        </Button>
+      </ListItem>
 
       {totalNumberOfPages > 4 ? (
         <>
-          {/* Primeira página sempre visível */}
-          <li>
-            <button
+          <ListItem>
+            <Button
               onClick={() => handlePagination(1)}
-              className={currentPage === 1 ? style.active : ""}
+              active={currentPage === 1}
             >
               {pageNumberLabel(1)}
-            </button>
-          </li>
+            </Button>
+          </ListItem>
 
-          {/* Adiciona "..." se a página atual for maior que 3 */}
-          {currentPage > 3 && <li>...</li>}
+          {currentPage > 3 && <ListItem>...</ListItem>}
 
-          {/* Exibe as páginas ao redor da atual */}
           {Array.from({ length: 5 }, (_, index) => {
-            const pageIndex = currentPage - 2 + index; // Mostra 5 páginas ao redor da página atual
+            const pageIndex = currentPage - 2 + index;
             return (
               pageIndex > 1 &&
-              pageIndex < totalNumberOfPages && ( // Exibe as páginas intermediárias
-                <li key={pageIndex}>
-                  <button
+              pageIndex < totalNumberOfPages && (
+                <ListItem key={pageIndex}>
+                  <Button
                     onClick={() => handlePagination(pageIndex)}
-                    className={currentPage === pageIndex ? style.active : ""}
+                    active={currentPage === pageIndex}
                   >
                     {pageNumberLabel(pageIndex)}
-                  </button>
-                </li>
+                  </Button>
+                </ListItem>
               )
             );
           })}
 
-          {/* Adiciona "..." se a página atual for antes da penúltima página */}
-          {currentPage < totalNumberOfPages - 2 && <li>...</li>}
+          {currentPage < totalNumberOfPages - 2 && <ListItem>...</ListItem>}
 
-          {/* Última página sempre visível */}
-          <li>
-            <button
+          <ListItem>
+            <Button
               onClick={() => handlePagination(totalNumberOfPages)}
-              className={currentPage === totalNumberOfPages ? style.active : ""}
+              active={currentPage === totalNumberOfPages}
             >
               {pageNumberLabel(totalNumberOfPages)}
-            </button>
-          </li>
+            </Button>
+          </ListItem>
         </>
       ) : (
-        // Caso tenha 4 ou menos páginas, mostra todas as páginas
         Array.from({ length: totalNumberOfPages }, (_, index) => (
-          <li key={index + 1}>
-            <button
+          <ListItem key={index + 1}>
+            <Button
               onClick={() => handlePagination(index + 1)}
-              className={currentPage === index + 1 ? style.active : ""}
+              active={currentPage === index + 1}
             >
               {pageNumberLabel(index + 1)}
-            </button>
-          </li>
+            </Button>
+          </ListItem>
         ))
       )}
 
-      <li>
-        <button
+      <ListItem>
+        <Button
           onClick={() => handlePagination(currentPage + 1)}
           disabled={currentPage === totalNumberOfPages}
         >
           <ChevronRight />
-        </button>
-      </li>
-    </ul>
+        </Button>
+      </ListItem>
+    </List>
   );
 }
+
+const List = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const ListItem = styled.li`
+  margin: 0;
+`;
+
+const Button = styled.button<{ active?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: ${({ active }) => (active ? '#f39c12' : '#023047')};
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 12px;
+  }
+`;

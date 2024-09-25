@@ -1,6 +1,6 @@
 import { IPost } from "@/interface/post.interface";
-import style from "./posts.module.scss";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 interface Props {
   post: IPost;
@@ -30,31 +30,158 @@ export function Posts({ post }: Props): JSX.Element {
   };
 
   return (
-    <div
-      className={style.postContainer}
-      onClick={() => navigate(`/post/${post.id}`)}
-    >
-      <div className={style.postImage}>
+    <PostContainer onClick={() => navigate(`/post/${post.id}`)}>
+      <PostImage>
         <img
           src={post.urlimage}
           alt={`Imagem da postagem sobre ${post.title}`}
         />
-      </div>
-      <div className={style.postInfoWrapper}>
-        <div className={style.postInfo}>
+      </PostImage>
+      <PostInfoWrapper>
+        <PostInfo>
           <h2>{post.title}</h2>
-          <div className={style.postNotification}>
+          <PostNotification>
             {postDate(post.createdat) === "New" ? (
-              <span className={style.postNew}>Novo!</span>
+              <NewPostBadge>Novo!</NewPostBadge>
             ) : (
-              <span className={style.postOld}>{postDate(post.createdat)}</span>
+              <OldPostBadge>{postDate(post.createdat)}</OldPostBadge>
             )}
-          </div>
-        </div>
-        <div className={style.postDescription}>
+          </PostNotification>
+        </PostInfo>
+        <PostDescription>
           <p>{post.content.slice(0, 80)}...</p>
-        </div>
-      </div>
-    </div>
+        </PostDescription>
+      </PostInfoWrapper>
+    </PostContainer>
   );
 }
+
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 254px;
+  height: auto;
+  padding-bottom: 5px;
+  gap: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    width: 676px;
+    height: 229px;
+    padding-bottom: 0;
+  }
+
+  @media (min-width: 768px) {
+    width: 800px;
+  }
+`;
+
+const PostImage = styled.div`
+  height: 171px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    width: 355px;
+    height: 100%;
+
+    img {
+      width: 250px;
+      border-radius: 10px 0 0 10px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    width: 355px;
+  }
+
+  @media (min-width: 1920px) {
+    width: 400px;
+  }
+`;
+
+const PostInfoWrapper = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 0 5px;
+
+  @media (min-width: 640px) {
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+`;
+
+const PostInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  h2 {
+    width: 70%;
+    font-family: "Helvetica", sans-serif;
+    font-size: 18px;
+    color: #219ebc;
+
+    @media (min-width: 640px) {
+      font-size: 28px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 32px;
+    }
+  }
+`;
+
+const PostNotification = styled.div`
+  width: 30%;
+  height: auto;
+  text-align: right;
+  font-family: "Helvetica", sans-serif;
+  font-size: 16px;
+`;
+
+const NewPostBadge = styled.span`
+  color: #ecf0f1;
+  background-color: #f39c12;
+  padding: 3px 4px;
+  border-radius: 30px;
+
+  @media (min-width: 640px) {
+    padding: 6px 8px;
+  }
+`;
+
+const OldPostBadge = styled.span`
+  color: #219ebc;
+`;
+
+const PostDescription = styled.div`
+  display: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #219ebc;
+
+  p {
+    cursor: pointer;
+  }
+
+  @media (min-width: 640px) {
+    display: flex;
+  }
+`;
