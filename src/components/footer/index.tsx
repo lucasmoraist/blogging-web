@@ -21,8 +21,6 @@ const StyledFooter = styled.footer`
   padding: 20px 0;
 
   @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
     padding: 30px 0;
   }
 
