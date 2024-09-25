@@ -9,13 +9,20 @@ interface DataPagination {
 }
 
 interface Props {
-    currentPage: number;
-    itemsPerPage: number;
-    setPosts: (posts: IPostAdmin[]) => void;
-    setTotalPages: (totalPages: number) => void;
+  currentPage: number;
+  itemsPerPage: number;
+  setPosts: (posts: IPostAdmin[]) => void;
+  setTotalPages: (totalPages: number) => void;
+  setLoading: (loading: boolean) => void;
 }
 
-export const listAdmin = async ({ currentPage, itemsPerPage, setPosts, setTotalPages }: Props) => {
+export const listAdmin = async ({
+  currentPage,
+  itemsPerPage,
+  setPosts,
+  setTotalPages,
+  setLoading,
+}: Props) => {
   http()
     .get<DataPagination>(
       `/admin/posts?page=${currentPage + 1}&limit=${itemsPerPage}`
@@ -23,6 +30,7 @@ export const listAdmin = async ({ currentPage, itemsPerPage, setPosts, setTotalP
     .then((response) => {
       setPosts(response.data.posts);
       setTotalPages(response.data.totalNumberOfPages);
+      setLoading(false);
     })
     .catch((error) => {
       console.error("Erro ao buscar posts:", error);
