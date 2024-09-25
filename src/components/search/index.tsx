@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import style from "./search.module.scss";
-import { http } from "@/utils/axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { getByTerm } from './service/getByTerm';
 
 interface SearchResult {
   id: string;
@@ -10,26 +10,15 @@ interface SearchResult {
 }
 
 export function SearchForm(): JSX.Element {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [noResults, setNoResults] = useState<boolean>(false); // Novo estado para verificar se há resultados
+  const [noResults, setNoResults] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  const fetchPosts = async (term: string) => {
-    try {
-      const response = await http().get("/posts/search", { params: { term } });
-      const results = response.data;
-      setSearchResults(results);
-      setNoResults(results.length === 0);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
     if (search.length > 0) {
       const delayDebounceFn = setTimeout(() => {
-        fetchPosts(search);
+        getByTerm({ term: search, setSearchResults, setNoResults });
       }, 300);
 
       return () => clearTimeout(delayDebounceFn);
@@ -40,40 +29,138 @@ export function SearchForm(): JSX.Element {
   }, [search]);
 
   const handleResultClick = (id: string) => {
-    setSearch("");
+    setSearch('');
     navigate(`/post/${id}`);
   };
 
   return (
-    <form className={style.searchWrapper}>
-      <div className={style.search}>
-        <input
+    <SearchWrapper>
+      <SearchBox>
+        <SearchInput
           type="search"
           placeholder="Pesquise aqui"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-      </div>
+      </SearchBox>
 
       {searchResults.length > 0 ? (
-        <div className={style.results}>
+        <Results>
           <ul>
             {searchResults.slice(0, 3).map((post) => (
-              <li key={post.id} onClick={() => handleResultClick(post.id)}>
+              <ResultItem
+                key={post.id}
+                onClick={() => handleResultClick(post.id)}
+              >
                 {post.title}
-              </li>
+              </ResultItem>
             ))}
           </ul>
-        </div>
+        </Results>
       ) : (
         noResults && (
-          <div className={style.results}>
+          <Results>
             <ul>
-              <li>Sem resultados</li>
+              <ResultItem>Sem resultados</ResultItem>
             </ul>
-          </div>
+          </Results>
         )
       )}
-    </form>
+    </SearchWrapper>
   );
 }
+
+const SearchWrapper = styled.form`
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const SearchBox = styled.div`
+  width: 154px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  border-radius: 30px;
+
+  @media (min-width: 576px) and (max-width: 768px) {
+    width: 200px;
+
+    input {
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 280px;
+
+    input {
+      height: 45px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    width: 400px;
+
+    input {
+      height: 60px;
+      font-size: 22px;
+    }
+  }
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 30px;
+  padding: 0 10px;
+  font-size: 16px;
+  background: transparent;
+  cursor: text;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
+
+const Results = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  z-index: 1000;
+  max-height: 200px;
+  max-width: 254px;
+  overflow-y: auto;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    width: 676px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 400px;
+    width: 676px;
+  }
+`;
+
+const ResultItem = styled.li`
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
