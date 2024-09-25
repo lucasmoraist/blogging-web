@@ -49,10 +49,9 @@ export function Aside({ posts }: Props): JSX.Element {
 
 const StyledLatestPostsContainer = styled.div`
   position: sticky;
-  top: 120px;
+  top: 20px;
   align-self: center;
   background-color: #023047;
-  height: 60%;
   padding: 12px;
   border-radius: 12px;
 `;

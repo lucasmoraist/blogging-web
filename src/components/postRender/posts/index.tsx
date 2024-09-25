@@ -66,14 +66,14 @@ const PostContainer = styled.div`
   gap: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     flex-direction: row;
-    width: 676px;
+    width: 700px;
     height: 229px;
     padding-bottom: 0;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1440px) {
     width: 800px;
   }
 `;

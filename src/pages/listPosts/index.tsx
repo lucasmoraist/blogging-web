@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -8,14 +8,14 @@ import {
   TableHead,
   TableRow,
   TablePagination,
-} from "@mui/material";
-import { Pencil, Trash } from "lucide-react";
-import style from "./listPosts.module.scss";
-import { useNavigate } from "react-router-dom";
-import { ConfirmModal } from "./confirmModal";
-import { IPostAdmin } from "@/interface/post-admin.interface";
-import { listAdmin } from "./service/listAdmin";
-import Loader from "@/components/loader/loader";
+} from '@mui/material';
+import { Pencil, Trash } from 'lucide-react';
+import style from './listPosts.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { ConfirmModal } from './confirmModal';
+import { IPostAdmin } from '@/interface/post-admin.interface';
+import { listAdmin } from './service/listAdmin';
+import Loader from '@/components/loader/loader';
 
 export function ListPosts() {
   const [posts, setPosts] = useState<IPostAdmin[]>([]);
@@ -51,7 +51,7 @@ export function ListPosts() {
   };
 
   const dateFormatter = (date: string) => {
-    return new Date(date).toLocaleDateString("pt-BR");
+    return new Date(date).toLocaleDateString('pt-BR');
   };
 
   if (loading) return <Loader />;
@@ -69,25 +69,25 @@ export function ListPosts() {
               </TableCell>
               <TableCell
                 className={style.tableCell}
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 Nome do professor
               </TableCell>
               <TableCell
                 className={style.tableCell}
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 Disciplina
               </TableCell>
               <TableCell
                 className={style.tableCell}
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 Data de criação
               </TableCell>
               <TableCell
                 className={style.tableCell}
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 Ações
               </TableCell>
@@ -98,30 +98,30 @@ export function ListPosts() {
               posts.map((post, index) => (
                 <TableRow key={index}>
                   <TableCell>{post.title}</TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     {post.name}
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     {post.school_subject}
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
+                  <TableCell sx={{ textAlign: 'center' }}>
                     {dateFormatter(post.createdat)}
                   </TableCell>
-                  <TableCell
-                    sx={{ display: "flex", justifyContent: "space-around" }}
-                  >
-                    <button
-                      onClick={() => navigate(`/admin/update/${post.id}`)}
-                      className={style.edit}
-                    >
-                      <Pencil />
-                    </button>
-                    <button
-                      onClick={() => setToggleModal(true)}
-                      className={style.delete}
-                    >
-                      <Trash />
-                    </button>
+                  <TableCell>
+                    <div className={style.actions}>
+                      <button
+                        onClick={() => navigate(`/admin/update/${post.id}`)}
+                        className={style.edit}
+                      >
+                        <Pencil />
+                      </button>
+                      <button
+                        onClick={() => setToggleModal(true)}
+                        className={style.delete}
+                      >
+                        <Trash />
+                      </button>
+                    </div>
 
                     {toggleModal && (
                       <ConfirmModal
