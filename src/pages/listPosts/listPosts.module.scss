@@ -3,36 +3,33 @@
 
 .sectionWrapper {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-
   padding: 35px 40px;
 
   h2 {
     font-size: 26px;
     font-weight: 700;
-    font-family: $helvetica_font;
-    color: $primary_color;
-    line-height: auto;
+    font-family: $font-helvetica;
+    color: $color-primary;
+    line-height: normal;
   }
 
   .tableContainer {
     width: 100%;
     max-width: 1280px;
 
-    // Representando todos os elementos que possuem a classe .tableCell
     .tableCell {
-      font-family: $montserrat_font;
+      font-family: $font-montserrat;
     }
 
     .tableHead {
-      background-color: $secondary_color;
+      background-color: $color-secondary;
 
       .tableCell {
-        color: $mustard_yellow;
+        color: $color-mustard-yellow;
         font-weight: 700;
       }
     }
@@ -41,41 +38,43 @@
       cursor: pointer;
 
       &:hover {
-        background-color: rgba($color: #000000, $alpha: 0.1);
+        background-color: rgba(0, 0, 0, 0.1);
       }
 
       .link {
-        color: #000;
+        color: $color-dark;
         text-decoration: none;
       }
     }
 
-    .edit {
+    @mixin button-style {
       border: none;
       background: transparent;
       svg {
         cursor: pointer;
 
         &:hover {
-          color: rgb(9, 9, 244);
+          color: inherit;
         }
+      }
+    }
+
+    .edit {
+      @include button-style; 
+      &:hover {
+        color: rgb(9, 9, 244);
       }
     }
 
     .delete {
-      border: none;
-      background: transparent;
-      svg {
-        cursor: pointer;
-
-        &:hover {
-          color: rgb(244, 9, 9);
-        }
+      @include button-style;
+      &:hover {
+        color: rgb(244, 9, 9);
       }
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $breakpoint-desktop-sm) {
     h2 {
       font-size: 36px;
     }

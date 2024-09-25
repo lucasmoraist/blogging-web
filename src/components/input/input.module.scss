@@ -3,9 +3,9 @@
 
 .inputComponent {
   span {
-    font-family: $roboto_font;
+    font-family: $font-roboto;
     font-size: 16px;
-    color: $secondary_color;
+    color: $color-secondary;
   }
   input {
     width: 100%;
@@ -17,8 +17,8 @@
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 
-    font-family: $roboto_font;
+    font-family: $font-roboto;
     font-size: 14px;
-    color: $secondary_color;
+    color: $color-secondary;
   }
 }

@@ -7,31 +7,31 @@
 
   border-radius: 31px;
 
-  font-family: $roboto_font;
+  font-family: $font-roboto;
   font-size: 16px;
   line-height: auto;
 }
 
 .btnPrimary {
   border: none;
-  background-color: $orange;
+  background-color: $color-orange;
   color: #fff;
 }
 
 .btnSecondary {
-  border: 2px solid $orange;
+  border: 2px solid $color-orange;
   background-color: transparent;
-  color: $orange;
+  color: $color-orange;
 }
 
-@media (min-width: $tablet_sml) and (max-width: $desktop_sml) {
+@media (min-width: $breakpoint-tablet-sm) and (max-width: $breakpoint-desktop-sm) {
   .btn {
     width: 100px;
     height: 35px;
   }
 }
 
-@media (min-width: $desktop_sml) {
+@media (min-width: $breakpoint-desktop-sm) {
   .btn {
     cursor: pointer;
     &:hover {
@@ -45,7 +45,7 @@
   }
 }
 
-@media (min-width: $desktop_lg) {
+@media (min-width: $breakpoint-desktop-lg) {
   .btn {
     width: 120px;
     height: 40px;

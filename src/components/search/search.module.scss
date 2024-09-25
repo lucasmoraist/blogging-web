@@ -71,7 +71,7 @@
     }
   }
 
-  @media (min-width: $mobile_md) and (max-width: $tablet_sml) {
+  @media (min-width: $breakpoint-mobile-md) and (max-width: $breakpoint-tablet-sm) {
     .search {
       width: 200px;
 
@@ -80,7 +80,7 @@
       }
     }
   }
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $breakpoint-tablet-sm) {
     .search {
       width: 280px;
 

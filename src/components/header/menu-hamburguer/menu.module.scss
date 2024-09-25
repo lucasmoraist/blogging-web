@@ -5,7 +5,7 @@
   position: relative;
 
   .burguerBar {
-    color: $mustard_yellow;
+    color: $color-mustard-yellow;
     width: 30px;
     height: 30px;
   }
@@ -64,11 +64,11 @@
       }
     }
     .linkNavigate {
-      color: $mustard_yellow;
+      color: $color-mustard-yellow;
 
       text-decoration: none;
       font-size: 18px;
-      font-family: $roboto_font;
+      font-family: $font-roboto;
       font-weight: bold;
 
       display: flex;
@@ -88,7 +88,7 @@
       svg {
         width: 30px;
         height: 30px;
-        color: $mustard_yellow;
+        color: $color-mustard-yellow;
       }
     }
   }

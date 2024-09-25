@@ -1,48 +1,40 @@
-@import '@/styles/_variables';
-@import '@/styles/_breakpoints';
+@import "@/styles/_variables";
+@import "@/styles/_breakpoints";
 
 .mainContainer {
-    width: 100%;
-    min-height: 100vh;
-    height: 100%;
-    padding: 33px 34px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 33px 34px;
 
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  button {
+    width: 80px;
+    height: 30px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    border: none;
+    background-color: $color-mustard-yellow;
+    color: $color-dark;
 
-    button {
-        width: 80px;
-        height: 30px;
+    font-family: $font-helvetica;
+    font-size: 16px;
+    line-height: 20px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 30px;
+    cursor: pointer;
+    transition: box-shadow ease-in 0.4s, background-color ease-out 0.9s;
 
-        border: none;
-        background-color: $mustard_yellow;
-
-        color: #fff;
-
-        font-family: $helvetica_font;
-        font-size: 16px;
-        line-height: 20px;
-
-        cursor: pointer;
-        transition: ease-in .4s;
-
-        &:hover {
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-        }
-
-        &:not(:hover){
-            transition: ease-out .9s;
-        }
-
-        svg {
-            width: auto;
-            height: 20px;
-        }
+    &:hover {
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     }
+
+    svg {
+      width: auto;
+      height: 20px;
+    }
+  }
 }

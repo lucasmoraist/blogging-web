@@ -2,7 +2,7 @@
 @import "@/styles/_variables";
 
 .headerWrapper {
-  background-color: $secondary_color;
+  background-color: $color-secondary;
 
   display: flex;
   justify-content: space-between;
@@ -38,11 +38,11 @@
       }
 
       .linkNavigate {
-        color: $mustard_yellow;
+        color: $color-mustard-yellow;
 
         text-decoration: none;
         font-size: 18px;
-        font-family: $roboto_font;
+        font-family: $font-roboto;
         font-weight: bold;
 
         display: flex;
@@ -65,7 +65,7 @@
     display: flex;
   }
 
-  @media (min-width: $mobile_md) and (max-width: $tablet_sml) {
+  @media (min-width: $breakpoint-mobile-md) and (max-width: $breakpoint-tablet-sm) {
     height: 70px;
 
     .logo {
@@ -75,7 +75,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) and (max-width: $desktop_md) {
+  @media (min-width: $breakpoint-tablet-sm) and (max-width: $breakpoint-desktop-md) {
     height: 100px;
 
     .logo {
@@ -99,13 +99,13 @@
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $breakpoint-desktop-sm) {
     .linkNavigate {
       cursor: pointer;
     }
   }
 
-  @media (min-width: $desktop_lg) {
+  @media (min-width: $breakpoint-desktop-lg) {
     height: 100px;
 
     .logo {

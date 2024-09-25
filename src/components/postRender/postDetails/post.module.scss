@@ -38,17 +38,17 @@
       width: 100%;
 
       h2 {
-        font-family: $helvetica_font;
+        font-family: $font-helvetica;
         font-size: 24px;
-        color: $secondary_color;
+        color: $color-secondary;
         font-weight: 500;
         line-height: auto;
       }
 
       p {
-        font-family: $montserrat_font;
+        font-family: $font-montserrat;
         font-size: 16px;
-        color: $secondary_color;
+        color: $color-secondary;
         line-height: 24px;
       }
     }
@@ -60,15 +60,15 @@
     align-items: end;
 
     p {
-      font-family: $montserrat_font;
+      font-family: $font-montserrat;
       font-size: 10px;
-      color: $secondary_color;
+      color: $color-secondary;
       font-weight: 600;
       line-height: 15px;
     }
   }
 
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $breakpoint-tablet-sm) {
     .post {
       .postContent {
         h2 {
@@ -88,7 +88,7 @@
     }
   }
 
-  @media (min-width: $desktop_lg) {
+  @media (min-width: $breakpoint-desktop-lg) {
     .post {
       .postImage {
         img {

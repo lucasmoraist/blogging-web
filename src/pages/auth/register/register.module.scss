@@ -4,21 +4,17 @@
 .sectionWrapper {
   width: 100%;
   min-height: 100vh;
-  height: 100%;
-
   display: flex;
   flex-direction: column;
-  gap: 30px;
   align-items: center;
   justify-content: center;
-
   padding: 20px 30px;
+  gap: 30px;
 
   h2 {
-    font-family: $helvetica_font;
+    font-family: $font-helvetica;
     font-size: 28px;
-    color: $primary_color;
-    list-style: auto;
+    color: $color-primary;
   }
 
   form {
@@ -27,23 +23,22 @@
     gap: 20px;
 
     .container {
-      border: none;
-
       display: flex;
       flex-direction: column;
       width: 100%;
+      border: none;
       gap: 20px;
 
       .subjectLabel {
-        font-family: "Roboto", sans-serif;
-        color: #219ebc;
+        font-family: $font-roboto;
+        color: $color-secondary;
         margin-bottom: 8px;
         font-size: 16px;
 
-        .subjectsDropdrown {
+        .subjectsDropdown {
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
           height: 50px;
-          background-color: #ffff;
+          background-color: #fff;
           width: 100%;
           font-weight: 600;
           border: none;
@@ -62,7 +57,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $breakpoint-tablet-sm) {
     h2 {
       font-size: 48px;
     }
@@ -81,12 +76,12 @@
 
       .buttons {
         flex-direction: row;
-        justify-content: end;
+        justify-content: flex-end;
       }
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $breakpoint-desktop-sm) {
     h2 {
       font-size: 64px;
     }

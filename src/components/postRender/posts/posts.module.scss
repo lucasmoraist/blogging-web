@@ -38,37 +38,37 @@
 
       h2 {
         width: 70%;
-        font-family: $helvetica_font;
+        font-family: $font-helvetica;
         font-size: 18px;
-        color: $secondary_color;
+        color: $color-secondary;
       }
 
       .postNotification {
         width: 30%;
         height: auto;
         text-align: right;
-        font-family: $helvetica_font;
+        font-family: $font-helvetica;
         font-size: 16px;
       }
 
       .postNew {
-        color: $bg_color;
-        background-color: $mustard_yellow;
+        color: $color-bg;
+        background-color: $color-mustard-yellow;
         padding: 3px 4px;
         border-radius: 30px;
       }
 
       .postOld {
-        color: $secondary_color;
+        color: $color-secondary;
       }
     }
 
     .postDescription {
       display: none;
-      font-family: $montserrat_font;
+      font-family: $font-montserrat;
       font-size: 16px;
       font-weight: 500;
-      color: $secondary_color;
+      color: $color-secondary;
 
       p {
         cursor: pointer;
@@ -76,7 +76,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $breakpoint-tablet-sm) {
     flex-direction: row;
     width: 676px;
     height: 229px;
@@ -115,7 +115,7 @@
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $breakpoint-desktop-sm) {
     .postInfo {
       h2 {
         cursor: pointer;
@@ -127,13 +127,13 @@
     }
   }
 
-  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
+  @media (min-width: $breakpoint-desktop-md) and (max-width: $breakpoint-desktop-lg) {
     .postImage {
       width: 355px;
     }
   }
 
-  @media (min-width: $desktop_md) and (max-width: $desktop_lg) {
+  @media (min-width: $breakpoint-desktop-md) and (max-width: $breakpoint-desktop-lg) {
     width: 800px;
   }
 }

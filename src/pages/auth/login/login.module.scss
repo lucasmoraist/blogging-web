@@ -4,20 +4,17 @@
 .sectionWrapper {
   width: 100%;
   min-height: 100vh;
-  height: 100%;
-
   display: flex;
   flex-direction: column;
-  gap: 30px;
   align-items: center;
   justify-content: center;
-
+  gap: 30px;
   padding: 20px 30px;
 
   h2 {
-    font-family: $helvetica_font;
+    font-family: $font-helvetica;
     font-size: 28px;
-    color: $primary_color;
+    color: $color-primary;
     list-style: auto;
   }
 
@@ -27,31 +24,28 @@
     gap: 20px;
 
     .container {
-      border: none;
-
       display: flex;
       flex-direction: column;
+      border: none;
       width: 100%;
       gap: 20px;
 
       label {
-        font-family: $roboto_font;
+        font-family: $font-roboto;
+        color: $color-secondary;
+
         font-size: 16px;
-        color: $secondary_color;
 
         input {
           width: 100%;
-          height: 30px;
           border: none;
           border-radius: 5px;
           padding-left: 10px;
           margin-top: 5px;
-
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-
-          font-family: $roboto_font;
-          font-size: 14px;
-          color: $secondary_color;
+          font-family: $font-roboto;
+          color: $color-secondary;
+          transition: height 0.3s ease, font-size 0.3s ease;
         }
       }
     }
@@ -65,7 +59,7 @@
     }
   }
 
-  @media (min-width: $tablet_sml) {
+  @media (min-width: $breakpoint-tablet-sm) {
     h2 {
       font-size: 48px;
     }
@@ -76,6 +70,7 @@
           font-size: 24px;
 
           input {
+            cursor: text;
             height: 40px;
             font-size: 20px;
           }
@@ -89,7 +84,7 @@
     }
   }
 
-  @media (min-width: $desktop_sml) {
+  @media (min-width: $breakpoint-desktop-sm) {
     h2 {
       font-size: 64px;
     }
@@ -102,7 +97,6 @@
           input {
             height: 50px;
             font-size: 24px;
-            cursor: text;
           }
         }
       }
