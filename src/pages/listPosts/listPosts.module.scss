@@ -1,5 +1,5 @@
-@import "@/styles/_variables";
-@import "@/styles/_breakpoints";
+@import '@/styles/_variables';
+@import '@/styles/_breakpoints';
 
 .sectionWrapper {
   width: 100%;
@@ -59,17 +59,22 @@
       }
     }
 
-    .edit {
-      @include button-style; 
-      &:hover {
-        color: rgb(9, 9, 244);
+    .actions {
+      display: flex;
+      gap: 10px;
+      
+      .edit {
+        @include button-style;
+        &:hover {
+          color: rgb(9, 9, 244);
+        }
       }
-    }
 
-    .delete {
-      @include button-style;
-      &:hover {
-        color: rgb(244, 9, 9);
+      .delete {
+        @include button-style;
+        &:hover {
+          color: rgb(244, 9, 9);
+        }
       }
     }
   }

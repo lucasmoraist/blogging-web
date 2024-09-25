@@ -16,6 +16,10 @@
     display: none;
   }
 
+  @media (min-width: $breakpoint-tablet-sm) {
+    padding: 50px 0;
+  }
+
   @media (min-width: $breakpoint-desktop-sm) {
     justify-content: space-around;
 

@@ -10,12 +10,13 @@
   justify-content: center;
   gap: 30px;
   padding: 20px 30px;
+  text-align: center;
 
   h2 {
     font-family: $font-helvetica;
     font-size: 28px;
     color: $color-primary;
-    list-style: auto;
+    transition: font-size .3s ease;
   }
 
   form {
@@ -27,35 +28,21 @@
       display: flex;
       flex-direction: column;
       border: none;
-      width: 100%;
       gap: 20px;
-
-      label {
-        font-family: $font-roboto;
-        color: $color-secondary;
-
-        font-size: 16px;
-
-        input {
-          width: 100%;
-          border: none;
-          border-radius: 5px;
-          padding-left: 10px;
-          margin-top: 5px;
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-          font-family: $font-roboto;
-          color: $color-secondary;
-          transition: height 0.3s ease, font-size 0.3s ease;
-        }
-      }
+      width: 100%;
     }
 
     .buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 10px;
+      transition: flex-direction 0.3s ease;
+
+      @media (min-width: $breakpoint-tablet-sm) {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
     }
   }
 
@@ -63,43 +50,11 @@
     h2 {
       font-size: 48px;
     }
-
-    form {
-      .container {
-        label {
-          font-size: 24px;
-
-          input {
-            cursor: text;
-            height: 40px;
-            font-size: 20px;
-          }
-        }
-      }
-
-      .buttons {
-        flex-direction: row;
-        justify-content: end;
-      }
-    }
   }
 
   @media (min-width: $breakpoint-desktop-sm) {
     h2 {
       font-size: 64px;
-    }
-
-    form {
-      .container {
-        label {
-          font-size: 32px;
-
-          input {
-            height: 50px;
-            font-size: 24px;
-          }
-        }
-      }
     }
   }
 }
