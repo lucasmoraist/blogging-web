@@ -1,4 +1,4 @@
-import style from "./button.module.scss";
+import styled from "styled-components";
 
 interface Props {
   children: React.ReactNode;
@@ -16,22 +16,64 @@ export function Button({
   return (
     <>
       {option === "primary" ? (
-        <button
-          className={`${style.btn} ${style.btnPrimary}`}
-          type={type}
-          onClick={onClick}
-        >
+        <PrimaryButton type={type} onClick={onClick}>
           {children}
-        </button>
+        </PrimaryButton>
       ) : (
-        <button
-          className={`${style.btn} ${style.btnSecondary}`}
-          type={type}
-          onClick={onClick}
-        >
+        <SecondaryButton type={type} onClick={onClick}>
           {children}
-        </button>
+        </SecondaryButton>
       )}
     </>
   );
 }
+
+const BaseButton = styled.button`
+  width: 145px;
+  height: 40px;
+  border-radius: 31px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: auto;
+  cursor: pointer;
+  padding: 8px 16px;
+
+  &:hover {
+    transition: ease-in 0.3s;
+    box-shadow: 0 4px 4px rgba(39, 174, 96, .2);
+  }
+
+  &:not(:hover) {
+    transition: ease-in 0.6s;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+  }
+
+  @media (min-width: 600px) {
+    width: 160px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+  }
+`;
+
+const PrimaryButton = styled(BaseButton)`
+  border: none;
+  background-color: #e36414;
+  color: #fff;
+`;
+
+const SecondaryButton = styled(BaseButton)`
+  border: 2px solid #e36414;
+  background-color: transparent;
+  color: #e36414;
+`;
