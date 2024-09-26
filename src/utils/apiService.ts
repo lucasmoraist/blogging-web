@@ -12,11 +12,11 @@ interface DataPagination {
   posts: IPostAdmin[];
   totalNumberOfPages: number;
 }
-const token = localStorage.getItem('token');
 
 // Função para configurar a instância do Axios
 const apiClient = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
+  const token = localStorage.getItem('token');
 
   if (!token) redirect('/login');
 
@@ -35,6 +35,7 @@ const apiService = {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
+    const token = localStorage.getItem('token');
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
@@ -68,6 +69,7 @@ const apiService = {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
+    const token = localStorage.getItem('token');
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
@@ -90,6 +92,7 @@ const apiService = {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
+    const token = localStorage.getItem('token');
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
@@ -112,6 +115,7 @@ const apiService = {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
+    const token = localStorage.getItem('token');
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;

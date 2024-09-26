@@ -1,12 +1,12 @@
-import style from "./styles/home.module.scss";
-import { Aside } from "./aside";
-import { useEffect, useState } from "react";
-import { IPost } from "@/interface/post.interface";
-import { Feed } from "./feed";
-import Loader from "../../components/loader/loader";
-import { PagesList } from "@/components/pagesList";
-import { Exceptions } from "../exception";
-import apiService from "@/utils/apiService";
+import style from './styles/home.module.scss';
+import { Aside } from './aside';
+import { useEffect, useState } from 'react';
+import { IPost } from '@/interface/post.interface';
+import { Feed } from './feed';
+import Loader from '../../components/loader/loader';
+import { PagesList } from '@/components/pagesList';
+import { Exceptions } from '../exception';
+import apiService from '@/utils/apiService';
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -16,7 +16,7 @@ export function Home() {
   const [totalNumberOfPages, setTotalNumberOfPages] = useState(0);
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -27,13 +27,13 @@ export function Home() {
       setLoading(false);
     }, 1000);
 
-    apiService.listPosts(currentPage, itemsPerPage).then(data => {
+    apiService.listPosts(currentPage, itemsPerPage).then((data) => {
       if (data) {
-        console.log(data);
-        
+        setIsMounted(true);
         setPosts(data.posts);
         setTotalNumberOfPages(data?.totalNumberOfPages);
-        setError("");
+      } else {
+        setIsMounted(false);
       }
     });
 
@@ -50,8 +50,8 @@ export function Home() {
     <>
       {loading ? (
         <Loader />
-      ) : error ? (
-        <Exceptions statusCode={500}/>
+      ) : !isMounted ? (
+        <Exceptions statusCode={500} />
       ) : (
         <div className={style.homeContainer}>
           <div className={style.randomPosts}>
