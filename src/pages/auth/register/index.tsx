@@ -1,4 +1,3 @@
-import { usePost } from '@/hooks/usePost';
 import { ITeacher } from '@/interface/teacher.interface';
 import { IUser } from '@/interface/user.interface';
 import { useNavigate } from 'react-router-dom';
@@ -8,9 +7,9 @@ import { Field, Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { Input } from '@/components/input/input';
 import { schoolSubjects } from './scripts/constants';
+import apiService from '@/utils/apiService';
 
 export function Register() {
-  const { registerData } = usePost();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -39,7 +38,7 @@ export function Register() {
     };
 
     try {
-      registerData<IUser>({ url: '/user', data: user }).then((response) => {
+      apiService.registerUser(user).then((response) => {
         if (response) {
           const teacher: ITeacher = {
             name: values.name,
@@ -47,7 +46,7 @@ export function Register() {
             user_id: response.data.id,
           };
 
-          registerData<ITeacher>({ url: '/teacher', data: teacher });
+          apiService.registerTeacher(teacher);
           navigate('/login');
         }
       });

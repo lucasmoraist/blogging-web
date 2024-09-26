@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import style from "./login.module.scss";
-import { usePost } from "@/hooks/usePost";
 import { Form, Formik, FormikValues } from "formik";
 import { Input } from "@/components/input/input";
 import { Button } from "@/components/button";
 import { authService } from "@/hooks/useAuth";
 import * as Yup from "yup";
+import apiService from "@/utils/apiService";
+import { useState } from "react";
 
 export function Login() {
   const navigate = useNavigate();
-
-  const { registerData, error } = usePost();
+  const [error] = useState("");
 
   const initialValues = {
     username: "",
@@ -28,14 +28,14 @@ export function Login() {
       password: values.password,
     };
 
-    registerData({ url: "/user/signin", data: user }).then((response) => {
+    apiService.login(user).then((response) => {
       if (response?.data.token === undefined) throw new Error();
 
       if (response?.status === 200) {
         authService.login({ token: response?.data.token });
         navigate("/");
       }
-    });
+    })
   };
 
   return (

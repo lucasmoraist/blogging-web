@@ -5,8 +5,8 @@ import { IPost } from "@/interface/post.interface";
 import { Feed } from "./feed";
 import Loader from "../../components/loader/loader";
 import { PagesList } from "@/components/pagesList";
-import { listPosts } from "./service/listPosts";
 import { Exceptions } from "../exception";
+import apiService from "@/utils/apiService";
 
 export function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -20,7 +20,6 @@ export function Home() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
 
     setLoading(true);
 
@@ -28,8 +27,10 @@ export function Home() {
       setLoading(false);
     }, 1000);
 
-    listPosts({ signal, currentPage, itemsPerPage }).then((data) => {
+    apiService.listPosts(currentPage, itemsPerPage).then(data => {
       if (data) {
+        console.log(data);
+        
         setPosts(data.posts);
         setTotalNumberOfPages(data?.totalNumberOfPages);
         setError("");

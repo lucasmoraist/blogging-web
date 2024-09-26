@@ -14,8 +14,8 @@ import style from './listPosts.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { ConfirmModal } from './confirmModal';
 import { IPostAdmin } from '@/interface/post-admin.interface';
-import { listAdmin } from './service/listAdmin';
 import Loader from '@/components/loader/loader';
+import apiService from '@/utils/apiService';
 
 export function ListPosts() {
   const [posts, setPosts] = useState<IPostAdmin[]>([]);
@@ -23,20 +23,24 @@ export function ListPosts() {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [toggleModal, setToggleModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  const fetchPosts = listAdmin({
-    currentPage,
-    itemsPerPage,
-    setPosts,
-    setTotalPages,
-    setLoading,
-  });
 
   useEffect(() => {
     fetchPosts;
   }, [currentPage, itemsPerPage]);
+
+  const fetchPosts = apiService
+    .listAdmin(currentPage, itemsPerPage)
+    .then((response) => {
+      if (response) {
+        setPosts(response.data.posts);
+        setTotalPages(response.data.totalNumberOfPages);
+        setLoading(false);
+      }
+    });
 
   const handleChangePage = (event: unknown, newPage: number) => {
     event;
@@ -95,44 +99,51 @@ export function ListPosts() {
           </TableHead>
           <TableBody>
             {posts.length > 0 ? (
-              posts.map((post, index) => (
-                <TableRow key={index}>
-                  <TableCell>{post.title}</TableCell>
-                  <TableCell sx={{ textAlign: 'center' }}>
-                    {post.name}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: 'center' }}>
-                    {post.school_subject}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: 'center' }}>
-                    {dateFormatter(post.createdat)}
-                  </TableCell>
-                  <TableCell>
-                    <div className={style.actions}>
-                      <button
-                        onClick={() => navigate(`/admin/update/${post.id}`)}
-                        className={style.edit}
-                      >
-                        <Pencil />
-                      </button>
-                      <button
-                        onClick={() => setToggleModal(true)}
-                        className={style.delete}
-                      >
-                        <Trash />
-                      </button>
-                    </div>
+              posts.map((post) => {
+                const id = post.id;
+                return (
+                  <TableRow key={post.id}>
+                    <TableCell>{post.title}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>
+                      {post.name}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>
+                      {post.school_subject}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>
+                      {dateFormatter(post.createdat)}
+                    </TableCell>
+                    <TableCell>
+                      <div className={style.actions}>
+                        <button
+                          onClick={() => navigate(`/admin/update/${post.id}`)}
+                          className={style.edit}
+                        >
+                          <Pencil />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setPostToDelete(id);
+                            setToggleModal(true);
+                          }}
+                          className={style.delete}
+                        >
+                          <Trash />
+                        </button>
+                      </div>
 
-                    {toggleModal && (
-                      <ConfirmModal
-                        id={post.id}
-                        fetchPosts={fetchPosts}
-                        setToggleModal={setToggleModal}
-                      />
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))
+                      {toggleModal && (
+                        <ConfirmModal
+                          postToDelete={postToDelete}
+                          setPostToDelete={setPostToDelete}
+                          setToggleModal={setToggleModal}
+                          fetchPosts={fetchPosts}
+                        />
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={5} align="center">

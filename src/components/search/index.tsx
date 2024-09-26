@@ -1,24 +1,33 @@
+import { ISearchResult } from '@/interface/search-result.interface';
+import apiService from '@/utils/apiService';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { getByTerm } from './service/getByTerm';
-
-interface SearchResult {
-  id: string;
-  title: string;
-  content: string;
-}
 
 export function SearchForm(): JSX.Element {
   const [search, setSearch] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
   const [noResults, setNoResults] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (search.length > 0) {
       const delayDebounceFn = setTimeout(() => {
-        getByTerm({ term: search, setSearchResults, setNoResults });
+        try {
+          
+          apiService.searchPosts(search).then(response => {
+            console.log(response);
+            if (response) {
+              setSearchResults(response.data);
+              setNoResults(response.data.length === 0);
+            }
+          });
+
+          // setSearchResults(results);
+          // setNoResults(results.length === 0);
+        } catch (error) {
+          console.error(error);
+        }
       }, 300);
 
       return () => clearTimeout(delayDebounceFn);
