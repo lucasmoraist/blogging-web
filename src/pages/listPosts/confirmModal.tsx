@@ -12,6 +12,7 @@ export function ConfirmModal({ postToDelete, setToggleModal, setPostToDelete, fe
   const deletePost = () => {
     if (postToDelete) {
       apiService.deletePost(postToDelete).then(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         fetchPosts;
         setToggleModal(false);
       });
