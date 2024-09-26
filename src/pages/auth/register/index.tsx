@@ -1,34 +1,34 @@
-import { usePost } from "@/hooks/usePost";
-import { ITeacher } from "@/interface/teacher.interface";
-import { IUser } from "@/interface/user.interface";
-import { useNavigate } from "react-router-dom";
-import style from "./register.module.scss";
-import { Button } from "@/components/button";
-import { Field, Form, Formik, FormikValues } from "formik";
-import * as Yup from "yup";
-import { Input } from "@/components/input/input";
-import { schoolSubjects } from "./scripts/constants";
+import { usePost } from '@/hooks/usePost';
+import { ITeacher } from '@/interface/teacher.interface';
+import { IUser } from '@/interface/user.interface';
+import { useNavigate } from 'react-router-dom';
+import style from './register.module.scss';
+import { Button } from '@/components/button';
+import { Field, Form, Formik, FormikValues } from 'formik';
+import * as Yup from 'yup';
+import { Input } from '@/components/input/input';
+import { schoolSubjects } from './scripts/constants';
 
 export function Register() {
   const { registerData } = usePost();
   const navigate = useNavigate();
 
   const initialValues = {
-    name: "",
-    school_subject: "",
-    username: "",
-    password: "",
-    passwordConfirmed: "",
-  }
+    name: '',
+    school_subject: '',
+    username: '',
+    password: '',
+    passwordConfirmed: '',
+  };
 
   const schema = Yup.object().shape({
-    name: Yup.string().required("Campo obrigatório"),
-    school_subject: Yup.string().required("Seleção obrigatória"),
-    username: Yup.string().required("Campo obrigatório"),
-    password: Yup.string().required("Campo obrigatório"),
+    name: Yup.string().required('Campo obrigatório'),
+    school_subject: Yup.string().required('Seleção obrigatória'),
+    username: Yup.string().required('Campo obrigatório'),
+    password: Yup.string().required('Campo obrigatório'),
     passwordConfirmed: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "As senhas devem ser iguais"
+      [Yup.ref('password')],
+      'As senhas devem ser iguais'
     ),
   });
 
@@ -39,7 +39,7 @@ export function Register() {
     };
 
     try {
-      registerData<IUser>({ url: "/user", data: user }).then((response) => {
+      registerData<IUser>({ url: '/user', data: user }).then((response) => {
         if (response) {
           const teacher: ITeacher = {
             name: values.name,
@@ -47,8 +47,8 @@ export function Register() {
             user_id: response.data.id,
           };
 
-          registerData<ITeacher>({ url: "/teacher", data: teacher });
-          navigate("/login");
+          registerData<ITeacher>({ url: '/teacher', data: teacher });
+          navigate('/login');
         }
       });
     } catch (error) {
@@ -73,12 +73,14 @@ export function Register() {
                   <Input title="Nome do professor" name="name" type="text" />
                 </label>
                 <label className={style.subjectLabel}>
-                  <span>Matéria</span>
+                  <p>Matéria</p>
                   <Field
                     name="school_subject"
                     as="select"
                     className={style.subjectsDropdown}
+                    placeholder="Selecione"
                   >
+                    <option value="" disabled selected>Selecione uma matéria</option>
                     {schoolSubjects.map((subject, index) => (
                       <option value={subject.value} key={index}>
                         {subject.label}
@@ -112,7 +114,7 @@ export function Register() {
                 <Button
                   option="secondary"
                   type="button"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate('/')}
                 >
                   Voltar
                 </Button>
