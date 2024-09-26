@@ -89,7 +89,7 @@ export function Register() {
                 </label>
 
                 <label>
-                  <Input title="Crie um username" name="username" type="text" />
+                  <Input title="Crie um nome de usuário" name="username" type="text" />
                 </label>
 
                 <label>

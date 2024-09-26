@@ -42,10 +42,9 @@
       gap: 20px;
       border: none;
 
-      .sectionWrapper, .form, .container, .subjectLabel, .subjectsDropdown {
+      .sectionWrapper, .subjectLabel, .subjectsDropdown {
         font-family: $font-roboto;
         color: $color-secondary;
-        margin-bottom: 28px;
         font-size: 0.725rem;
         border-radius: 5px;
 
@@ -53,15 +52,17 @@
           font-size: 16px;
           margin-bottom: 8px;
         }
-            @media (max-width: $breakpoint-desktop-lg) {
-            height: 50px;
+            @media (min-width: $breakpoint-desktop-lg) {
             font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 24px;
             }
 
-            @media (max-width: $breakpoint-tablet-md) {
+            @media (min-width: $breakpoint-tablet-md) {
             font-size: 18px;
             height: 30px;
             border-radius: 5px;
+            margin-bottom: 36px;
           }
         }
 
@@ -72,13 +73,17 @@
           font-weight: 600;
           border: none;
           padding: 6px;
-          margin-top: 6px;
           height: 50px;
 
           @media (max-width: $breakpoint-desktop-md) {
-            font-size: 14px;
-            height: 40px;
-            position: relative;
+            font-size: 16px;
+            height: 45px;
+            bottom: 8px;
+          }
+
+          @media (max-width: $breakpoint-mobile-lg) {
+            font-size: 16px;
+            height: 30px;
             bottom: 8px;
           }
         }
