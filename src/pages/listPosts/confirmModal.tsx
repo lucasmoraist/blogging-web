@@ -2,17 +2,21 @@ import apiService from '@/utils/apiService';
 import styled from 'styled-components';
 
 interface Props {
-  id: string;
   setToggleModal: (value: boolean) => void;
-  fetchPosts: Promise<void>;
+  setPostToDelete: (value: string | null) => void;
+  postToDelete: string | null;
+  fetchPosts: Promise<void>
 }
 
-export function ConfirmModal({ fetchPosts, id, setToggleModal }: Props) {
-  const remove = (postId: string) => {
-    apiService.deletePost(postId).then(() => {
-      fetchPosts;
-      setToggleModal(false);
-    });
+export function ConfirmModal({ postToDelete, setToggleModal, setPostToDelete, fetchPosts }: Props) {
+  const deletePost = () => {
+    if (postToDelete) {
+      apiService.deletePost(postToDelete).then(() => {
+        fetchPosts;
+        setToggleModal(false);
+      });
+    }
+    setPostToDelete(null);
   };
 
   return (
@@ -20,7 +24,8 @@ export function ConfirmModal({ fetchPosts, id, setToggleModal }: Props) {
       <ModalContent>
         <h3>Você deseja mesmo excluir essa postagem?</h3>
         <ButtonContainer>
-          <ConfirmButton onClick={() => remove(id)}>Sim</ConfirmButton>
+          <ConfirmButton onClick={deletePost}>Sim</ConfirmButton>
+
           <CancelButton onClick={() => setToggleModal(false)}>Não</CancelButton>
         </ButtonContainer>
       </ModalContent>
