@@ -17,7 +17,6 @@ interface Props {
 
 function UpdateForm({ posts, formik }: Props) {
   const navigate = useNavigate();
-  console.log(posts);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

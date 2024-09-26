@@ -16,15 +16,11 @@ export function SearchForm(): JSX.Element {
         try {
           
           apiService.searchPosts(search).then(response => {
-            console.log(response);
             if (response) {
               setSearchResults(response.data);
               setNoResults(response.data.length === 0);
             }
           });
-
-          // setSearchResults(results);
-          // setNoResults(results.length === 0);
         } catch (error) {
           console.error(error);
         }
