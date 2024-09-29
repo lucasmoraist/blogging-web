@@ -59,7 +59,7 @@ export function FormPost() {
     };
 
     if (id) {
-      apiService.updatePost(id, posts);
+      apiService.updatePost(id, post);
       navigate('/admin/posts');
     } else {      
       apiService.createPost(post);

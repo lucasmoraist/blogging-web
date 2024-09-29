@@ -1,6 +1,5 @@
 import { IDataPagination } from '@/interface/pagination.interface';
 import { IPostAdmin } from '@/interface/post-admin.interface';
-import { IPost } from '@/interface/post.interface';
 import { IRegisterPost } from '@/interface/register-post.interface';
 import { ISearchResult } from '@/interface/search-result.interface';
 import axios from 'axios';
@@ -65,7 +64,7 @@ const apiService = {
   },
 
   // Método para atualizar um post
-  updatePost: async (id: string, post: IPost | undefined) => {
+  updatePost: async (postId: string, post: IRegisterPost | undefined) => {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
@@ -78,7 +77,10 @@ const apiService = {
     }
 
     try {
-      const response = await apiClient().put(`/admin/posts/${id}`, post, {
+      const response = await apiClient().put(`/admin/posts/${postId}`, {
+        title: post?.title,
+        content: post?.content,
+      }, {
         headers,
       });
       return response;
